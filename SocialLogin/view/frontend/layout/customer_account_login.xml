@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017-2018 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="customer.login.inner">
+            <!-- customer.form.login.extra -->
+            <container name="social-login-pg-container"  htmlTag="div" htmlClass="social-login-pg-container" after="customer_form_login">
+                <block class="Urjakart\SocialLogin\Block\Gologin" name="urjakart.social.gologin" template="Urjakart_SocialLogin::bt_gologin.phtml"  cacheable="false" />
+                <block class="Urjakart\SocialLogin\Block\Fblogin" name="urjakart.social.fblogin" template="Urjakart_SocialLogin::bt_fblogin.phtml"  cacheable="false" />
+                <block class="Urjakart\SocialLogin\Block\Linklogin" name="urjakart.social.linklogin" template="Urjakart_SocialLogin::bt_linkedlogin.phtml"  cacheable="false" />
+            </container>
+
+        </referenceContainer>
+    </body>
+</page>

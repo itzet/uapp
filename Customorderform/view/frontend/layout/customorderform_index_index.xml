@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title> Post Your Requirement - Custom Order Form | Urjakart</title>
+        <meta name="description" content="Post your bulk buy requirement from wide range of categories such as Tools, Lights, Electrical and Hardware Supplies, Industrial and Construction Supplies. Get the wholesale price for your product on placing bulk order."/>
+        <css src="css/cms-styles.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="form.content.head">
+                <block  class="Urjakart\Customorderform\Block\CustomOrderForm" name="customorder.head.content" template="Urjakart_Customorderform::form_content_head.phtml" />
+            </container>
+            <container htmlTag="div" htmlClass="form-main" name="form.main">
+                <container htmlTag="div" htmlClass="form-content" name="custom.form.content">
+                    <block  class="Urjakart\Customorderform\Block\CustomOrderForm" name="customorder.form.head" template="form_head.phtml"/>
+                    <container htmlTag="div" htmlClass="custom-form">
+                        <block  class="Urjakart\Customorderform\Block\CustomOrderForm" name="cms.bulkorder" template="Urjakart_Customorderform::customorderform.phtml" cacheable="false" />
+                    </container>
+                </container>
+                <block  class="Urjakart\Customorderform\Block\CustomOrderForm" name="customorder.form.footer" template="form_footer.phtml" after="custom.form.content"/>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="page.main.title" remove="true" />
+        <referenceContainer name="header.panel.wrapper" remove="true" />
+        <referenceBlock name="minicart" remove="true" />
+        <referenceBlock name="miniquote" remove="true" />
+        <referenceContainer name="navigation.sections" remove="true" />
+    </body>
+</page>

@@ -1,0 +1,107 @@
+<?php
+/**
+ * Copyright ©2017 Urjakart. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /* @var $block \Urjakart\UkIndexer\Block\System\Config\Collect */ ?>
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+        var collectSpan = jQuery('#collect_span');
+        jQuery('#collect_button').click(function () {
+            var params = {};
+            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     false,
+                asynchronous:   true,
+                onCreate: function() {
+                    collectSpan.find('.collected').hide();
+                    collectSpan.find('.processing').show();
+                    jQuery('#collect_message_span').text('');
+                    jQuery('#collect_button').attr('disabled', 'disabled');
+                    var warning = 'Please do not refresh the page or navigate to other page until process success or failure, Highly Recommended!';
+                    if (jQuery('table').find('#uk_appended_row').length) {
+                        jQuery('#uk_appended_row').attr('class', '');
+                        jQuery('#uk_appended_row').addClass('alert');
+                        jQuery('#uk_appended_row').addClass('alert-warning');
+                        jQuery('#uk_appended_row').text(warning);
+                    } else {
+                        jQuery('#row_ukindexer_general_update_attribute').parent().append('<tr><td colspan="2" class="alert alert-warning" id="uk_appended_row">' + warning + '</td></tr>');
+                    }
+                },
+                onSuccess: function(response) {
+                    collectSpan.find('.processing').hide();
+                    jQuery('#collect_button').attr('disabled', false);
+                    var resultText = '';
+                    var json = response.responseJSON;
+                    if (response.status == 200) {
+                        resultText = 'Success';
+                        collectSpan.find('.collected').show();
+                        if (json.error) {
+                            resultText = 'failed';
+                            jQuery('#uk_appended_row').removeClass('alert-warning');
+                            jQuery('#uk_appended_row').addClass('alert-danger');
+                            jQuery('#uk_appended_row').text(json.error);
+                        } else {
+                            jQuery('#uk_appended_row').removeClass('alert-warning');
+                            jQuery('#uk_appended_row').addClass('alert-success');
+                            jQuery('#uk_appended_row').text('Total '+ json.count + ' Records has been Updated.');
+                        }
+                    } else {
+                        resultText = response.statusText;
+                        jQuery('#uk_appended_row').removeClass('alert-warning');
+                        jQuery('#uk_appended_row').addClass('alert-danger');
+                        jQuery('#uk_appended_row').text('Ajax error!');
+                    }
+                    jQuery('#collect_message_span').text(resultText);
+                }
+            });
+        });
+
+    });
+</script>
+<?php echo $block->getButtonHtml() ?>
+<span class="collect-indicator" id="collect_span">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="collected" hidden="hidden" alt="Collected" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span id="collect_message_span"></span>
+</span>
+<style>
+    .alert {
+        padding: 15px !important;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .alert-warning {
+        color: #8a6d3b;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+    .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+    .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+    .scalable {
+        background-color: #eb5202;
+        border-color: #eb5202;
+        color: #fff;
+        text-shadow: 1px 1px 0 rgba(0,0,0,0.25);
+    }
+    .scalable:hover {
+        background-color: #ba4000;
+        border-color: #b84002;
+        box-shadow: 0 0 0 1px #007bdb;
+        color: #fff;
+        text-decoration: none;
+    }
+</style>

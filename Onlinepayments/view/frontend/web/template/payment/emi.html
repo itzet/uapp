@@ -1,0 +1,114 @@
+<div class="col-md-12 payment-method-content" id="emi-block" style="background: #f5faff;">
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <div class="col-md-9 content-block">
+        <!--EMI payment form start-->
+        <!-- ko if: getInstructions() -->
+        <div id="emi_content">
+            <p data-bind="html: getInstructions()"></p>
+        </div>
+        <!-- /ko -->
+        <div id="emiForm">
+            <div class="alert-warning" id="emi-not-err" style="display: none"></div>
+            <select id="cardtype_emi"
+                    data-bind="
+                        optionsValue: 'value',
+                        optionsText: 'label',
+                        optgroup: emiOptions" onchange="selectEmiBank(this.value);">
+            </select>
+            <span id="error-cardtype-emi" class="pay-error"></span>
+
+            <!-- EMI TABLE -->
+            <table class="table table-striped" id="emiRateTable"></table>
+            <span id="error-emitype-emi" class="pay-error"></span>
+            <!-- End EMI Table -->
+
+            <div id="emi-card-form" style="display: none;">
+                <div class="cardnumber">
+                    <input style="display:none" type="text" />
+                    <input type="tel" id="ccnum_emi" class="" maxlength="16"
+                           placeholder="Card Number"
+                           onblur="showErr(this, 'em')"
+                           onpaste="return false;"
+                           onchange="validateEmiCard(this, 'CC', false);"
+                           onkeypress="validateEmiCard(this, 'CC', event.charCode);
+                           return (event.charCode >= 48 && event.charCode <= 57) ||
+                           event.charCode == 0 || event.ctrlKey;" autocomplete="off"
+                    />
+                    <span id="error-ccnum_emi" class="pay-error"></span>
+                    <div class="field-tooltip toggle card_img">
+                        <span id="processing_emi" style="display: none;"></span>
+                        <span id="visa_emi" style="display: none;"></span>
+                        <span id="master_emi" style="display: none;"></span>
+                        <span id="amex_emi" style="display: none;"></span>
+                    </div>
+                    <div class="cardnumber">
+                        <input style="display:none" type="text" />
+                        <input type="text" id="name_emi" class="" mixlength="2" maxlength="35"
+                               placeholder="Card Holder Name"
+                               style="border: 1px solid #ccc;"
+                               onkeyup="convertUpperCase(this)"
+                               onblur="validateName(this, true)"
+                               autocomplete="off"
+                        />
+                        <span id="error-name_emi" class="pay-error"></span>
+                    </div>
+                    <div class="card-details">
+                        <div style="width:100%; float:left;">
+                            <div class="card-date" id="emi_card_date">
+                                <span class="exp">
+                                    Expiry
+                                </span>
+                                <select id="ccexpmon_emi" onchange="removeError(this)"
+                                        data-bind="
+                                        optionsValue: 'value',
+                                        optionsText: 'label',
+                                        optgroup: expMonths">
+                                </select>
+                                <select id="ccexpyr_emi" onchange="removeError(this)"
+                                        data-bind="
+                                        optionsValue: 'value',
+                                        optionsText: 'label',
+                                        optgroup: expYears">
+                                </select>
+                            </div>
+                            <div class="card cvv" id="emi_card_cvv">
+                                <input style="display:none" type="password" />
+                                <input type="password" id="ccvv_emi" maxlength="3"
+                                       onblur="removeErrorCvv(this)" placeholder="CVV"
+                                       onkeypress='return (event.charCode >= 48 && event.charCode <= 57)
+                                    || event.charCode == 0 || event.ctrlKey;' autocomplete="off"
+                                />
+                                <span class="icons cvv_icon"></span>
+                                <span id="error_ccvv_emi" class="pay-error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="error_ccexpmon_emi" class="pay-error"></span>
+                    <span id="error_ccexpyr_emi" class="pay-error"></span>
+                </div>
+                <p style="">
+                    <span class="icons lock_icon"></span>
+                    Your card details are secured via 128 Bit encryption
+                </p>
+            </div>
+            <input type="hidden" id="cardtype_em" value="" />
+            <!--EMI payment form end-->
+        </div>
+    </div>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button id="checkoutprocess_emi"  onclick="addFaq();"
+                    class="action primary checkout"
+                    type="submit"
+                    data-bind="
+                    click: placeOrder,
+                    enable: (getCode() == isChecked() && isEmiEnabled())
+                    "
+                    disabled>
+                <span data-bind="text: 'Place Order'"></span>
+            </button>
+        </div>
+    </div>
+</div>

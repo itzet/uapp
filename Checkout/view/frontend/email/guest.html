@@ -1,0 +1,156 @@
+<!--@subject Welcome to Urjakart @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<div style="background: #F6F6F6; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; margin: 0; padding: 0;">
+    <table style="width: 100%;background: #dcdadaa1;" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="padding: 20px 0 20px 0;" align="center" valign="top"><!-- [ header starts here] -->
+                <table style="border:0px solid #e0e0e0; width:710px;" border="0" cellspacing="0" cellpadding="10" bgcolor="FFFFFF">
+                    <tbody>
+                    <tr>
+                        <td style="padding:0;">
+                            <table valign="top" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tbody><tr>
+                                    <td width="50%" class="responsive-td">
+                                        <table valign="top" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tbody><tr>
+                                                <td style="padding:12px 20px 11px; text-align:left;" class="urjakart-logo">
+                                                    <a href="{{store url=""}}" target="_blank" title="{{var store.getFrontendName()}}">
+                                                    <img src="https://img1.urjacart.in/image/upload/email/logo.jpg" alt="{{var store.getFrontendName()}}">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+                                    </td>
+                                    <td width="50%" class="responsive-td-menu">
+                                        <table valign="top" border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align:center;">
+                                            <tbody><tr>
+                                                <td style="padding:0 20px;font-size:15px;" class="naveText">
+                                                    <a href="https://www.urjakart.com/about-us" title="About Us" target="_blank" style="color:#929292;text-decoration:none;">
+                                                        About Us
+                                                    </a>
+                                                </td>
+                                                <td style="color:#929292;font-size:15px;">
+                                                    |
+                                                </td>
+                                                <td style="padding:0 20px;font-size:15px;" class="naveText">
+                                                    <a href="https://www.urjakart.com/sale" title="Product" target="_blank" style="color:#929292;text-decoration:none;">
+                                                        Product
+                                                    </a>
+                                                </td>
+                                                <td style="color:#929292;font-size:15px;">
+                                                    |
+                                                </td>
+                                                <td style="padding:0 13px 0 20px;font-size:15px;" class="naveText">
+                                                    <a href="https://www.urjakart.com/contact-us" title="Contact Us" target="_blank" style="color:#929292;text-decoration:none;">
+                                                        Contact Us
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0;">
+                            <table style="background:#0d559a;" valign="top" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <td style="background: #0d559a;padding:24px 0 5px; text-align:center;">
+                                        <img src="https://img1.urjacart.in/image/upload/email/icon/welcome-img.png" alt="Welcome Image" width="250">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #0d559a;color: #fff;padding:21px 0 24px;line-height: 19px;font-size: 13px;text-align:center;">
+                                        Welcome to {{var store.getFrontendName()}}.<br> To log in to {{var store.getFrontendName()}}, just
+                                        <a style="text-decoration: underline;color: #ffffff;" href="{{store url="customer/account/login/"}}">click here</a>.<br>and enter your e-mail address and password.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="height=20px;"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+
+                            <p style="font-size: 12px; line-height: 16px; margin: 0; padding:25px 64px 22px;">
+                                Use the following when prompted to login:<br />
+                                <strong>E-mail</strong>: {{var email}}<br />
+                                <strong>Password</strong>: {{var password}} <br />
+                                {{trans "We highly recommended to you change your password first.  "}}<a style="color:#1e7ec8;" target="_blank" href="{{var change}}">Click here!</a>
+                            </p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background: #fff;padding: 1px 75px 25px;text-align: left;font-size:12px;" class="innerTableTD-1">
+                            <table border="0" cellpadding="0" ;cellspacing="0">
+                                <tbody><tr>
+                                    <td>
+                                        <p style="line-height:17px;margin:0;padding:0;font-size:12px;">Click <a style="text-decoration: underline;color:#1e7ec8;" href="{{store url="customer/account/"}}" target="_blank">here</a> to view your account dashboard. On account dashboard, you will be able to do the following:</p><br>
+                                        <ul style="font-size: 12px; line-height: 16px; margin: 0 0 16px 0; padding: 0;">
+                                            <li style="list-style: none inside; padding: 0 0 0 10px;margin:0 0 3px 0;">– Check the status of your orders</li>
+                                            <li style="list-style: none inside; padding: 0 0 0 10px;margin:0 0 3px 0;">– View past orders</li>
+                                            <li style="list-style: none inside; padding: 0 0 0 10px;margin:0 0 3px 0;">– Update your account information</li>
+                                            <li style="list-style: none inside; padding: 0 0 0 10px;margin:0 0 3px 0;">– Proceed through checkout faster when making a purchase</li>
+                                            <li style="list-style: none inside; padding: 0 0 0 10px;margin:0 0 0 0;">– Store alternative addresses</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" style="padding: 15px 0px 15px 15px;border-left: 4px solid #ccc;">
+                                        <p style="font-size:12px;line-height:16px;margin:0">If you have any queries, please contact us at:
+                                            <br>Email:
+                                            <a style="color: #1e7ec8;" href="mailto:{{config path='trans_email/ident_general/email'}}">{{config path="trans_email/ident_general/email"}}</a>
+                                            <br> Phone: <span>{{config path='general/store_information/phone'}}</span>
+                                            <br>Whatsapp: +91-959-988-4826
+                                            <br>Hours: (Monday - Saturday, {{config path="general/store_information/hours"}})</p>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </td>
+                    </tr>
+                    <tr><td style="padding: 0 25px;border-top: 1px solid #ccc" class="footerPad">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                            <tbody><tr>
+                                <td width="50%">
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left"><a href="https://www.facebook.com/urjakart" target="_blank" title="Facebook"><img src="https://img1.urjacart.in/image/upload/email/icon/icon-facebook.png" alt="Facebook" border="0" width="32"></a></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="10"></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left"><a href="https://twitter.com/urjakartindia" target="_blank" title="Twitter"><img src="https://img1.urjacart.in/image/upload/email/icon/icon-twitter.png" alt="Twitter" border="0" width="32"></a></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="10"></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left"><a href="https://www.linkedin.com/company/urjakart" target="_blank" title="Linkedin"><img src="https://img1.urjacart.in/image/upload/email/icon/icon-linkedin.png" alt="Linkedin" border="0" width="32"></a></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="10"></td>
+                                            <td class="img" style="font-size:0pt; line-height:0pt; text-align:left"><a href="https://plus.google.com/+UrjakartIndia" target="_blank" title="Google Plus"><img src="https://img1.urjacart.in/image/upload/email/icon/icon-google.png" alt="Google Plus" border="0" width="32"></a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td width="50%" style="padding: 21px 0;color: #000000;font-size: 12px;line-height: 1.5;text-align:right;">
+                                    Thank you, <strong>{{var store.getFrontendName()}}</strong>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

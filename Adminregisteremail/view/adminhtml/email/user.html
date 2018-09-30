@@ -1,0 +1,72 @@
+<!--@subject Welcome to Urjakart @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<div style="background: #F6F6F6; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; margin: 0; padding: 0;">
+    <table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="padding: 20px 0 20px 0;" align="center" valign="top"><!-- [ header starts here] -->
+                <table style="border: 1px solid #e0e0e0; width: 650px;" border="0" cellspacing="0" cellpadding="10" bgcolor="FFFFFF">
+                    <tbody>
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}">
+                            <img src="https://img1.urjacart.in/image/upload/email/logo.jpg"  border="0" />
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size: 15px; font-weight: normal; line-height: 16px; margin: 0 0 11px 0;">
+                                Dear {{var customer_name}},
+                            </h1>
+                            <p style="font-size: 12px; line-height: 16px; margin: 0 0 16px 0;">
+                                Welcome to {{var store.getFrontendName()}}. To log in when visiting our site just click
+                                <a style="color: #1e7ec8;" href="{{store url="customer/account/"}}">Login</a> or
+                                {{trans <a style="color: #1e7ec8;" href="%customer_url">My Account</a> page:'customer_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}
+                                at the top of every page, and then enter your e-mail address and password.
+                            </p>
+                            <p style="border: 1px solid #E0E0E0; font-size: 12px; line-height: 16px; margin: 0; padding: 13px 18px; background: #f9f9f9;">
+                                Use the following when prompted to log in:<br />
+                                <strong>E-mail</strong>: {{var email}}<br />
+                                <strong>Password</strong>: {{var password}} <br />
+                                {{trans "We highly recommended to you change your password first!  "}}<a target="_blank" href="{{var change}}">Click here!</a>
+                            </p>
+                            <p style="font-size: 12px; line-height: 16px; margin: 0 0 8px 0;">&nbsp;</p>
+                            <p style="font-size: 12px; line-height: 16px; margin: 0 0 8px 0;">
+                                Click <a href="{{store url="customer/account/"}}" target="_blank">here</a>
+                                to view your account dasboard. On account dashboard, you will be able to do the following:
+                            </p>
+                            <ul style="font-size: 12px; line-height: 16px; margin: 0 0 16px 0; padding: 0;">
+                                <li style="list-style: none inside; padding: 0 0 0 10px;"><span style="background-color: #f6f6f6;">&ndash; Check the status of orders</span></li>
+                                <li style="list-style: none inside; padding: 0 0 0 10px;">&ndash; View past orders</li>
+                                <li style="list-style: none inside; padding: 0 0 0 10px;">&ndash; Make changes to your account information</li>
+                                <li style="list-style: none inside; padding: 0 0 0 10px;">&ndash;&nbsp;<span>Proceed through checkout faster when making a purchase</span></li>
+                                <li style="list-style: none inside; padding: 0 0 0 10px;">&ndash; Store alternative addresses</li>
+
+                            </ul>
+                            <p style="font-size: 12px; line-height: 16px; margin: 0;">&nbsp;</p>
+                            <p style="font-size: 12px; line-height: 16px; margin: 0;">
+                                If you have any questions about your account or any other matter, please feel free to contact us at
+                                <a style="color: #1e7ec8;" href="mailto:{{config path='trans_email/ident_general/email'}}">{{config path="trans_email/ident_general/email"}}</a>
+                                or call us at {{config path='general/store_information/phone'}} or whatsapp us at +91-959-988-4826 (Monday - Saturday, {{config path="general/store_information/hours"}}).
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background: #EAEAEA; text-align: center;" align="center" bgcolor="#EAEAEA">
+                            <center>
+                                <p style="font-size: 12px; margin: 0;">Thank you again, <strong>{{var store.getFrontendName()}}</strong></p>
+                            </center>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

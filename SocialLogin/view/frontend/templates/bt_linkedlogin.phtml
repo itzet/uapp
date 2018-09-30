@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © 2018 Urjakart. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php if ($block->isShowLinkedButton() && !$block->_getSession()->isLoggedIn()) : ?>
+    <div id="bt_link_social_login_checkout" <?php echo $block->isCheckoutPage() ?> >
+        <button id="bt-loginlinked" class="bt-login-social" title="<?php echo __('Login by Linked-In') ?>" onclick="linkedLogin()">
+            <span><i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn </span>
+        </button>
+        <div id="linked-in-error" style="color:red;"></div>
+    </div>
+    <script type="text/javascript">
+        var newwindow;
+        function linkedLogin() {
+            document.getElementById('linked-in-error').innerHTML = '';
+            var screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+            var screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+            var	 outerWidth = typeof screen.width != 'undefined' ? screen.width : document.body.clientWidth;
+            var	 outerHeight = typeof screen.height != 'undefined' ? screen.height : (document.body.clientHeight - 22);
+            var	 width    = parseInt((outerWidth * 45) / 100);
+            var	 height   = parseInt((outerHeight * 55) / 100);
+            var left = parseInt(screenX + ((outerWidth - width) / 2), 10);
+            var top = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
+            var features = (
+                'width=' + width +
+                ',height=' + height +
+                ',left=' + left +
+                ',top=' + top
+            );
+            if (typeof window.inProcessLogin === 'undefined' || window.inProcessLogin === null) {
+                window.inProcessLogin = 'Login process with linked-in, please wait...';
+            } else {
+                document.getElementById('login_in_process_data').innerHTML = window.inProcessLogin;
+                document.getElementById('login_in_process').className = 'uk-login-error-pop';
+                document.getElementById('login_in_process').style.display = 'block';
+                document.getElementById('uk-ovrlay-login').style.visibility = 'visible';
+
+
+                return false;
+            }
+
+            newwindow = window.open('<?php echo $this->getLinkedInLoginUrl() ?>', 'Login_by_LinkedIn', features);
+
+            if (window.focus) {
+                newwindow.focus()
+            }
+            var timer = setInterval(checkChild, 500);
+
+            function checkChild() {
+                if (newwindow.closed) {
+                    window.inProcessLogin = null;
+                    document.getElementById('login_in_process_data').innerHTML = '';
+                    document.getElementById('login_in_process').style.display = 'none';
+                    document.getElementById('uk-ovrlay-login').style.visibility = 'hidden';
+                    var xhttp = new XMLHttpRequest();
+                    var url = '<?php echo $block->getCheckLoginUrl(); ?>';
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState === 1 || this.readyState === 2 || this.readyState === 3) {
+
+                        } else if (this.readyState === 4 && this.status === 200) {
+                            var response = JSON.parse(this.responseText);
+                            if (response.error === '' && response.success) {
+                                location.reload(true);
+                            } else if (response.error !== '') {
+                                document.getElementById('linked-in-error').innerHTML = response.error;
+                            }
+                        }
+                    };
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                    clearInterval(timer);
+                }
+            }
+
+            return false;
+        }
+    </script>
+<?php endif; ?>

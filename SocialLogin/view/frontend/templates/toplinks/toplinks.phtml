@@ -1,0 +1,230 @@
+<?php
+/**
+ * Copyright © 2017 Urjakart. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ */
+?>
+<div id="auth-popup">
+    <div class="popup_banner hidden-xs hidden-sm"></div>
+    <div class="border-popup">
+        <div id="auth-popup-close" title="Close" onclick="closeInProcess(this)" ></div>
+        <!-- Login user -->
+        <div id="auth-login-div" style="display: none">
+            <h3 class="uk-login-h3 popup_login_active"><?php echo $block->escapeHtml(__("Login")) ?></h3>
+            <a id="uk-popup-create-new-customer" class="popup_register-a" href="javascript:void(0);">
+                <?php echo $block->escapeHtml(__('Register')) ?>
+            </a>
+            <div id="auth-forgot-link">
+                <span><?php echo $block->escapeHtml(__('Please enter your email address below to receive a password reset link.')); ?></span>
+            </div>
+            <!-- form Login -->
+            <form id="auth-login-form" class="uk-login-form-popup" autocomplete="off">
+                <!-- email -->
+                <div class="auth-login-input-box">
+                    <div class="uk-login-input-box">
+                        <input id="uk-popup-login-email"  class="input-text validate-email" placeholder="Email"
+                               type="email" title="<?php echo $block->escapeHtml(__('Email')) ?>" name="uk_login_email" onkeypress="return event.charCode != 32" />
+                        <input id="uk-popup-login-token" type="hidden" name="uk-popup-login-token"/>
+                    </div>
+                </div>
+                <!-- passowrd -->
+                <div id="magestore-sociallogin-password" class="auth-login-input-box">
+                    <div class="uk-login-input-box">
+                        <input type="password" id="uk-popup-login-pass"
+                               class="input-text validate-password" placeholder="Password"
+                               title="<?php echo $block->escapeHtml(__('Password ')); ?> " name="uk_login_password" onkeypress="return event.charCode != 32" />
+                    </div>
+                </div>
+                <!-- image ajax -->
+                <div id="progress_image_login" class="ajax-login-image" style="display: none">
+                </div>
+                <!-- error invalid email -->
+                <div id="uk-popup-invalid-email" class="uk-popup-invalid-email"></div>
+                <div class="uk-login-popup-button">
+                    <button id="uk-popup-login-button" class="button popup_click_btn" name="send"
+                            title="<?php echo $block->escapeHtml(__('Login')) ?>" type="button">
+                        <span><span><?php echo $block->escapeHtml(__('Login')) ?></span></span>
+                    </button>
+                    <div class="pass-register">
+                        <a id="uk-popup-forgot-password" href="javascript:void(0);">
+                            <?php echo $block->escapeHtml(__('Forgot Password?')) ?>
+                        </a>
+                        <a id="uk-popup-create-new-customer" style="display: none;"
+                           href="javascript:void(0);"><?php /*echo $block->escapeHtml(__('Register Now')) */?></a>
+                    </div>
+                </div>
+            </form>
+            <!-- form forgot -->
+            <form id="uk-popup-forgot-form" class="uk-login-form-popup" style="display: none">
+                <div id="uk-valid-email-reset" style="color:green;"></div>
+                <div class="auth-login-input-box">
+                    <div class="uk-login-input-box">
+                        <input id="uk-popup-forgot-email" class="input-text validate-email"
+                               placeholder="Email"  type="email"
+                               title="Email" name="uk_email_forgot" onkeypress="return event.charCode != 32" />
+                        <input id="uk-popup-forgot-token" type="hidden" name="uk_token_forgot"/>
+                    </div>
+                </div>
+                <!-- image ajax -->
+                <div id="progress_image_login_forgot" class="ajax-login-image" style="display: none">
+                </div>
+                <!-- error invalid email -->
+                <div id="uk-invalid-email-forgot" class="uk-popup-invalid-email"></div>
+                <div class="uk-login-popup-button">
+                    <button id="uk-popup-login-forgot-button" class="button popup_click_btn"
+                            title="<?php echo $block->escapeHtml(__('Reset')); ?>" type="button">
+                        <span><span><?php echo $block->escapeHtml(__('Reset')) ?></span></span>
+                    </button>
+                    <a id="uk-popup-forgot-back"
+                       href="javascript:void(0);"><?php echo $block->escapeHtml(__('Back to Login')) ?></a>
+                </div>
+            </form>
+        </div>
+        <!-- create new user -->
+        <div id="uk-popup-create-user">
+            <a id="uk-back-to-login" class="popup_login-a" href="javascript:void(0);">
+                <?php echo $block->escapeHtml(__('Login') )?>
+            </a>
+            <h3 class="uk-login-h3 popup_register_active"><?php echo $block->escapeHtml(__("Register")) ?></h3>
+            <form id="uk-popup-new-customer-form" class="uk-login-form-popup" autocomplete="off">
+                <ul class="form-list">
+                    <li class="fields">
+                        <div class="form-group sociallogin-field">
+                            <div class="input-box">
+                                <input id="uk_new_first_name" class="input-text validate-first-name"
+                                       placeholder="First name" type="text" minlength="3" maxlength="40" autofocus
+                                       title="<?php echo $block->escapeHtml(__('First name')); ?>" name="firstname" onkeypress="return event.charCode != 32" />
+                            </div>
+                        </div>
+                        <div class="form-group sociallogin-field">
+                            <div class="input-box">
+                                <input id="uk_new_last_name" class="input-text validate-last-name"
+                                       type="text" minlength="3" maxlength="40" placeholder="Last name"
+                                       title="<?php echo $block->escapeHtml(__('Last name')); ?>"
+                                       name="lastname" onkeypress="return event.charCode != 32" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="form-group sociallogin-field">
+                            <div class="input-box">
+                                <input id="uk_new_gst" class="input-text validate-gst" type="text"
+                                       placeholder="GST number"
+                                       title="<?php echo $block->escapeHtml(__('GST number')); ?>" name="gst" maxlength="15" onkeypress="return event.charCode != 32" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="form-group sociallogin-field">
+                            <div class="input-box">
+                                <input id="uk_new_email" class="input-text validate-email" maxlength="40" type="email"
+                                       placeholder="Email"
+                                       title="<?php echo $block->escapeHtml(__('Email')); ?>" name="email" onkeypress="return event.charCode != 32" />
+                                <input id="uk_new_token" type="hidden" name="auth-new-token"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="form-group sociallogin-field">
+                            <div class="input-box">
+                                <input id="uk_new_password" class="input-text validate-password"
+                                       type="password" placeholder="Password"
+                                       title="<?php echo $block->escapeHtml(__('Password ')); ?>"
+                                       name="pass" onkeypress="return event.charCode != 32" />
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- image ajax -->
+                <div id="progress_image_login_create" class="ajax-login-image" style="display: none">
+                </div>
+                <!-- error invalid create ACC -->
+                <div id="uk-invalid-new-customer" class="uk-popup-invalid-email"></div>
+                <div class="uk-create-popup-button">
+                    <button id="uk-button-social-login-create" class="button popup_click_btn"
+                            title="<?php echo $block->escapeHtml(__('Submit')); ?>" type="button">
+                        <span><span><?php echo $block->escapeHtml(__('Submit')) ?></span></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- social login -->
+        <?php if (count($block->makeArrayButton())) : ?>
+        <div id="uk-social-login-popup">
+            <div class="uk-or-class"><span>or</span></div>
+            <h3 class="popup-title-h3 popup_login_with">
+                <?php echo $block->escapeHtml(__("Login with")); ?>
+            </h3>
+            <!-- default -->
+            <ul class="uk-social-login-popup">
+                <!--<div id="progress_image_login_social" class="ajax-login-image" style="display:none;">
+                </div>-->
+                <?php foreach ($block->makeArrayButton() as $key => $button): ?>
+                    <li class="button popup"> <?php echo $button['button'] ?> </li>
+                    <script type="text/javascript">
+                        require([
+                            'prototype'
+                        ], function () {
+                            if ($('<?php echo $button['id'] ?>'))
+                                $('<?php echo $button['id'] ?>').addClassName('visible');
+                        });
+                    </script>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+<div id="login_in_process" style="display: none;">
+    <div id="login-in-process-close" onclick="closeInProcess(this)"></div>
+    <div id="login_in_process_data">
+    </div>
+</div>
+<div id="uk-ovrlay-login" style="visibility: hidden;"></div>
+<script type="text/javascript">
+    require([
+        'prototype',
+        'Urjakart_SocialLogin/js/light_box'
+    ], function () {
+
+    });
+    require([
+        'Urjakart_SocialLogin/js/popup_login',
+        'prototype'
+    ], function (LoginPopup) {
+        Event.observe(window, 'load', function () {
+            var options = {
+                login_url: "<?php echo $block->escapeHtml($this->getPopupLoginUrl());?>",
+                send_pass_url: "<?php echo $block->escapeHtml($this->getPopupSendPass());?>",
+                create_url: "<?php echo $block->escapeHtml($this->getPopupCreateAcc());?>",
+                base_url: "<?php echo $block->escapeHtml($this->getBaseUrl());?>",
+                after_login_url: "<?php echo $block->escapeHtml($this->getLoginRedirectUrl());?>",
+                after_register_url: "<?php echo $block->escapeHtml($this->getRegisterRedirectUrl());?>"
+            };
+            new LoginPopup(options);
+        });
+    });
+    function closeInProcess(self) {
+        openukOvrlay();
+        if(self.id == 'auth-popup-close')
+            bodyRemoveClass();
+        document.getElementById('login_in_process_data').innerHTML = '';
+        document.getElementById('login_in_process').style.display = 'none';
+    }
+    function openukOvrlay() {
+       document.getElementById('uk-ovrlay-login').style.visibility = 'hidden';
+    }
+    function bodyRemoveClass() {
+        var x = document.getElementsByTagName('body')[0];
+        x.classList.remove('scrolldisabled');
+    }
+    window.isSocialEnabledOnCheckout = <?php echo count($block->makeArrayButton()); ?>;
+</script>
+<script type="text/javascript">
+    window.onkeyup = function (event) {
+        if (event.keyCode == 27) {
+            document.getElementById('auth-popup-close').click();
+        }
+    }
+</script>

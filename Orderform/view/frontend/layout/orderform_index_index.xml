@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Urjakart. All rights reserved.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Urjakart Custom Order - Quick Order Form | Urjakart</title>
+        <meta name="description" content="For Placing quick order, fill the form and we will create order for you. Buy Online Directly from Indian Manufacturers and Suppliers offering wide range in Tools, Lights, Electrical and Hardware Supplies, Industrial and Construction Supplies."/>
+        <css src="css/cms-styles.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Urjakart\Orderform\Block\OrderForm" name="uk.orderform" template="Urjakart_Orderform::orderform.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

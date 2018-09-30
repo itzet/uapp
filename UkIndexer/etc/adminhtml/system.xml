@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Urjakart. All rights reserved.
+  ~ See COPYING.txt for license details.
+  ~
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="urjakartstore" translate="label" sortOrder="400">
+            <label>Urjakart Extension</label>
+        </tab>
+        <section id="ukindexer" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Urjakart Indexer</label>
+            <tab>urjakartstore</tab>
+            <resource>Urjakart_UkIndexer::config_ukindexer</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <comment>
+                    <![CDATA[<div style="color:#8a6d3b;background-color:#fcf8e3;border-color:#faebcc;padding:10px;"><b>Note: </b>Please make sure before click on "Run" button, because this is directly modify the table and run indexer also, Highly recommended do not click without requirement!]]>
+                </comment>
+                <field id="enable_ukindexer" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Urjakart Indexer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="update_attribute" translate="label" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>Urjakart\UkIndexer\Block\System\Config\Collect</frontend_model>
+                    <label>Update Product Attributes</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

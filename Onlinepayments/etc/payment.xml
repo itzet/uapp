@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <groups>
+        <group id="onlinepayments">
+            <label>Online Payment Methods</label>
+        </group>
+    </groups>
+    <methods>
+        <method name="creditcard">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="debitcard">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="netbanking">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="emi">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="payumoney">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+    </methods>
+</payment>

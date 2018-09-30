@@ -1,0 +1,167 @@
+<?php
+$block->executeForm();
+$user = $block->getLoggedInUserData();
+$block->requestCallBackProcess();
+?>
+<div id="popup_cb" style="display: none;">
+    <div id="popup_box_cb" class="popup-box_cb">
+        <div id="close_cb" onclick ="popup_cb_hide()">
+            <img src="https://img1.urjacart.in/image/upload/icon/page/close.png" alt="Cross Image" />
+        </div>
+        <div class="main-content callback">
+            <div class="container">
+                <div class="row form-head">
+                    <h4>Confused..<span class="confuse"></span></h4>
+                    <h4 class="sub-h4">Talk to our domain expert</h4>
+                </div>
+                <div class="col-md-12 form-content">
+                    <form action="<?php echo $block->getProductUrl(); ?>" id="callback" method="post" >
+                        <input type="hidden" name="csrf_token_post" value="<?php echo $block->getCSRFToken(); ?>" >
+                        <input type="hidden" name="sku" value="<?php echo $block->getSKU();?>" >
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                                        <input readonly type="text" class="form-control required-entry" style="background-color: #f9f9f9;word-wrap: break-word;word-break: normal;border: 1px solid #CCCCCC;box-shadow: none;" name="pname" value="<?php echo $block->getProductName();?>" placeholder="Product Name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-float-label">
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <input type="text" tabindex="1"  autofocus  minlength="3" maxlength="40" class="form-control validate-name" id="cname" name="name" value="<?php echo $user['name']; ?>" placeholder="Name" onkeyup="correctName(this)" />
+                                        <label for="name" class="label">Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-float-label">
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                        <input type="tel" tabindex="2"  minlength="10" maxlength="10" class="form-control validate-mobile" name="mobile" value="<?php echo $user['mobile']; ?>"  placeholder="Mobile"
+                                               onkeypress="validateNumInput(event.charCode); return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 || event.ctrlKey;" />
+                                        <label for="mobile" class="label">Mobile</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-float-label">
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        <input type="email" tabindex="3"   maxlength="40" class="form-control validate-email" name="email" value="<?php echo $user['email']; ?>" placeholder="Email" onkeypress="return event.charCode != 32" />
+                                        <label for="email" class="label">Email</label>
+                                    </div>
+                                </div>
+                           </div>
+                        </fieldset>
+                        <div class="actions-toolbar">
+                            <div class="primary btn-form">
+                                <button type="submit" class="btn button_submit" tabindex="4"  id="button_cb" name="reqsubmit" value="reqsubmit"><i class="fa fa-volume-control-phone" aria-hidden="true"></i>...Call Me</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#callback": {
+            "validation": {}
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    //Function To Display Popup
+    function popup_cb_show() {
+        document.getElementById('popup_cb').style.display = "block";
+        document.getElementById("cname").focus();
+    }
+    //Function to Hide Popup
+    function popup_cb_hide(){
+        document.getElementById('popup_cb').style.display = "none";
+    }
+
+    function validateNumInput(charCode) {
+        if (!(typeof charCode === 'boolean' || (charCode >= 48 && charCode <= 57))) {
+            return false;
+        }
+    }
+
+    window.onkeyup = function (event) {
+        if (event.keyCode == 27) {
+          document.getElementById('close_cb').click();
+        }
+    }
+
+</script>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$fProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$brandName = $fProduct->getResource()->getAttribute("manufacturer")->getFrontend()->getValue($fProduct);
+$categoryIdList = $fProduct->getCategoryIds();
+$i = 1;
+$categoryIds = array();
+foreach($categoryIdList as $catid){
+    $data = $objectManager->create('Magento\Catalog\Model\Category')->load($catid);
+    $categoryIds[$data->getLevel()] = $catid;
+}
+ksort($categoryIds);
+foreach($categoryIds as $category){
+    $cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category);
+    ${catnamel.$i} = $cat->getName();
+    $i++;
+}
+unset($_SESSION['ref']);
+?>
+<script>
+    var ref = '<?php echo $block->ref(); ?>';
+    if(ref){
+        mixpanel.register({
+                "First Name":"<?php echo $_SESSION['fName'];?>",
+                "Last Name":"<?php echo $_SESSION['lName'];?>",
+                "Email":"<?php echo $_SESSION['email'];?>",
+                "Mobile":"<?php echo $_SESSION['mobile'];?>"
+        });
+        mixpanel.track(
+            "Submitted Request Call Back",
+            {
+                "Product Name": '<?php echo $fProduct->getName();?>',
+                "Product SKU": '<?php echo $fProduct->getSku();?>',
+                "Product Category L1": "<?php echo $catnamel1; ?>",
+                "Product Category L2": "<?php echo $catnamel2; ?>",
+                "Product Category L3": "<?php echo $catnamel3; ?>",
+                "Product Price":"<?php if($fProduct->getSpecialPrice()): ?><?php echo substr($fProduct->getSpecialPrice(),0,-5); ?><?php else: ?><?php echo substr($fProduct->getPrice(),0,-5); ?><?php endif; ?>",
+                "Product Brand":"<?php echo $brandName;?>"
+            }
+        );
+        mixpanel.people.set({
+            "$first_name":"<?php echo $_SESSION['fName'];?>",
+            "$last_name":"<?php echo $_SESSION['lName'];?>",
+            "$email":"<?php echo $_SESSION['email'];?>",
+            "$phone":"<?php echo $_SESSION['mobile'];?>"
+        });
+
+        fbq('track', 'Lead', {
+            value: <?php echo $fProduct->getSpecialPrice() ? round($fProduct->getSpecialPrice()) : round($fProduct->getPrice()); ?>,
+            currency:'INR',
+            content_ids:'<?php echo $fProduct->getSku();?>',
+            content_name:'<?php echo $fProduct->getName();?>',
+            content_category: '<?php echo $catnamel3; ?>',
+            num_items: document.getElementById('qty').value,
+            content_type: 'product'
+        });
+    }
+
+    function correctName(self) {
+        var data = self.value;
+        if (!(/^[a-zA-Z]+ ?([a-zA-Z]*) ?([a-zA-Z]*)$/i.test(data))) {
+            self.value = data.trim();
+        }
+    }
+</script>

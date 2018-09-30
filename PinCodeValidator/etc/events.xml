@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_before">
+        <observer name="cod_pin_code_valid_fee_add" instance="Urjakart\PinCodeValidator\Observer\AddedCodFee" />
+    </event>
+    <event name="sales_order_invoice_register">
+        <observer name="cod_fee_order_invoice" instance="Urjakart\PinCodeValidator\Observer\InvoiceCodFee" />
+    </event>
+</config>

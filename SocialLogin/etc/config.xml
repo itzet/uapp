@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Urjakart. All rights reserved.
+  ~ See COPYING.txt for license details.
+  ~
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+    <default>
+        <sociallogin>
+            <general>
+                <enable_socials>1</enable_socials>
+                <login_redirect_page>/</login_redirect_page>
+                <register_redirect_page>customer/account</register_redirect_page>
+            </general>
+            <fblogin>   
+                <is_active>0</is_active>
+                <sort_order>1</sort_order>
+            </fblogin>
+            <gologin>   
+                <is_active>0</is_active>
+                <sort_order>2</sort_order>
+            </gologin>
+            <linklogin>
+                <is_active>0</is_active>
+                <sort_order>3</sort_order>
+            </linklogin>
+        </sociallogin>
+    </default>
+</config>

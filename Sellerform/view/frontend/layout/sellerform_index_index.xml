@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Urjakart. All rights reserved.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Sell On Urjakart - Seller Form | Urjakart</title>
+        <meta name="description" content="Sell products Online and reach out to millions of customers with Urjakart. Grow your business today with best online selling platform for B2B e-commerce solutions."/>
+        <css src="css/cms-styles.css" />
+    </head>
+    <body>
+        <referenceContainer name="root">
+            <block class="Magento\Framework\View\Element\Template" name="UKThemeSellOnUrjakart.header" template="Urjakart_Sellerform::sellerheader.phtml"  before="-" />
+        </referenceContainer>
+
+        <referenceContainer name="root">
+            <block class="Urjakart\Sellerform\Block\SellerForm" name="UKThemeSellOnUrjakart.footer" template="Urjakart_Sellerform::sellerfooter.phtml"  after="-" />
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Urjakart\Sellerform\Block\SellerForm" name="uk.sellerform" template="Urjakart_Sellerform::sellerform.phtml" cacheable="false" />
+        </referenceContainer>
+
+        <referenceContainer name="page.top" remove="true" />
+        <referenceContainer name="header.container" remove="true" />
+        <referenceContainer name="footer" remove="true" />
+    </body>
+</page>

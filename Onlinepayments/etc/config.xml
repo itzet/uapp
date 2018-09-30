@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <creditcard>
+                <active>1</active>
+                <model>Urjakart\Onlinepayments\Model\CreditCard</model>
+                <title>Credit Card</title>
+                <service_provider>payu_paisa</service_provider>
+                <production_url>https://secure.payu.in/_payment</production_url>
+                <sandbox_url>https://test.payu.in/_payment</sandbox_url>
+                <environment>sandbox</environment>
+                <account_type>payubiz</account_type>
+                <redirect_url>onlinepayment/standard/redirect</redirect_url>
+                <return_url>onlinepayment/standard/response</return_url>
+                <cancel_url>onlinepayment/standard/cancel</cancel_url>
+                <emi_url>onlinepayment/standard/emi</emi_url>
+                <card_url>onlinepayment/standard/card</card_url>
+                <merchant_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <salt backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <group>onlinepayments</group>
+            </creditcard>
+            <debitcard>
+                <active>0</active>
+                <model>Urjakart\Onlinepayments\Model\DebitCard</model>
+                <title>Debit Card</title>
+                <service_provider>payu_paisa</service_provider>
+                <production_url>https://secure.payu.in/_payment</production_url>
+                <sandbox_url>https://test.payu.in/_payment</sandbox_url>
+                <environment>sandbox</environment>
+                <account_type>payubiz</account_type>
+                <merchant_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <salt backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <group>onlinepayments</group>
+            </debitcard>
+            <netbanking>
+                <active>0</active>
+                <model>Urjakart\Onlinepayments\Model\NetBanking</model>
+                <title>Net Banking</title>
+                <service_provider>payu_paisa</service_provider>
+                <production_url>https://secure.payu.in/_payment</production_url>
+                <sandbox_url>https://test.payu.in/_payment</sandbox_url>
+                <environment>sandbox</environment>
+                <account_type>payubiz</account_type>
+                <merchant_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <salt backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <group>onlinepayments</group>
+            </netbanking>
+            <emi>
+                <active>0</active>
+                <model>Urjakart\Onlinepayments\Model\Emi</model>
+                <title>EMI</title>
+                <service_provider>payu_paisa</service_provider>
+                <production_url>https://secure.payu.in/_payment</production_url>
+                <sandbox_url>https://test.payu.in/_payment</sandbox_url>
+                <environment>sandbox</environment>
+                <account_type>payubiz</account_type>
+                <merchant_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <salt backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <group>onlinepayments</group>
+            </emi>
+            <payumoney>
+                <active>0</active>
+                <model>Urjakart\Onlinepayments\Model\PayuMoney</model>
+                <title>PayuMoney</title>
+                <service_provider>payu_paisa</service_provider>
+                <production_url>https://secure.payu.in/_payment</production_url>
+                <sandbox_url>https://test.payu.in/_payment</sandbox_url>
+                <environment>sandbox</environment>
+                <account_type>payubiz</account_type>
+                <merchant_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <salt backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <group>onlinepayments</group>
+            </payumoney>
+            <wallets>
+                <active>1</active>
+                <model>Urjakart\Onlinepayments\Model\Wallet</model>
+                <title>Wallet</title>
+                <group>onlinepayments</group>
+            </wallets>
+            <emigroup>
+                <active>1</active>
+                <model>Urjakart\Onlinepayments\Model\EmiGroup</model>
+                <title>EMI</title>
+                <group>onlinepayments</group>
+            </emigroup>
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,45 @@
+<footer class="page-footer">
+    <div class="footer">
+        <div class="footer-container">
+
+            <!-- footer for medium and large devices -->
+            <div class="container">
+
+                <div class="row copyright-footer">
+                    <div class="col-md-3  col-lg-3 col-sm-4 col-xs-12 text-left pt-link-footer">
+                        <span><a href="/privacy-policy">Privacy Policy</a></span>
+                        <span>|</span>
+                        <span><a href="/terms-and-conditions">Terms of Use</a></span>
+                    </div>
+                    <div class="col-md-5 col-lg-5 col-sm-8 col-xs-12 address">
+                        <address><?php /* @escapeNotVerified */ echo $block->getCopyright() ?></address>
+                    </div>
+                    <div class="col-md-4 col-lg-4 hidden-xs hidden-sm">
+                        <ul class="social-link-footer">
+                            <li> Connect With Us: </li>
+                            <li class="facebook"><a href="https://www.facebook.com/urjakart" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li class="twitter"><a href="https://twitter.com/urjakartindia" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li class="gplus"><a href="https://plus.google.com/+UrjakartIndia" rel="nofollow" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li class="linkedin"><a href="https://www.linkedin.com/company/urjakart" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li class="youtube"><a href="https://www.youtube.com/user/urjakart" rel="nofollow" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- End -->
+
+            <div class="row paymeny-meth uk-paypartners">
+                <div class="col-lg-12">
+                <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('payment_icons')->toHtml();?>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</footer>

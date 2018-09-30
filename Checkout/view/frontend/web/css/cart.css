@@ -1,0 +1,62 @@
+.minicart-wrapper{
+    visibility: hidden;
+}
+.header {
+    background-color: transparent;
+}
+.container-head {
+    background-color: #ffffff;
+    box-shadow:1px 2px 3px 0 #e3e3e3;
+}
+.logo-header {
+    height: 73px;
+    padding: 15px 0;
+}
+
+
+.action-towishlist {display: none;}
+
+.cart-header {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.cart-header-inner { height: 60px; padding: 5px 0; max-width: 1100px; margin:auto;}
+
+.cart-payment {width: 100%; margin:auto; padding-top: 5px; }
+.cart-payment span {display: inline-block; margin:5px 1px;}
+
+
+.cart-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e3e3e3;
+
+}
+#cart-payment-icons {float:right;}
+
+.cart-copy-text {padding-top:15px;}
+
+.cart-logo {margin-top: 3px; float:left;}
+.logo_img {
+    background: url(https://img1.urjacart.in/image/upload/icon/logo.svg) no-repeat;
+    width:150px;
+    height: 45px;
+}
+
+.cart-trust-icon {margin-right:0; float: right;margin-left:0;}
+
+.cart-trust-icon_img {
+    background:url(https://img1.urjacart.in/image/upload/icon/page/trust_icon.png) no-repeat;
+    width: 500px;
+    height: 50px;
+}
+
+@media (max-width:767px) {
+    .cart-logo {float: none;}
+    .cart-logo .logo_img {margin:0 auto;}
+    .cart-summary>.title {
+        margin-left: 3%;
+    }
+}
+

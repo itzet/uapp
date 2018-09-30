@@ -1,0 +1,388 @@
+<?php
+$block->executeForm();
+$user = $block->getLoggedInUserData();
+$block->customOrderRequest();
+?>
+<form action="<?php echo $block->getFormAction(); ?>" method="post" id="bulkrequirementform" enctype="multipart/form-data" autocomplete="off">
+    <input type="hidden" name="csrf_token_post" value="<?php echo $block->getCSRFToken(); ?>" >
+    <fieldset>
+        <legend>Post Your Requirement</legend>
+        <section id="sectionAreaToAddField" class="more-field-section">
+            <div class="form-group pname">
+                <div class="col-md-12 col-xs-12">
+                    <label for="pName">Product name :</label>
+                    <input type="text" name="productName[]" id="pName" tabindex="1" placeholder="Product name" maxlength="50" class="form-control validate-product-name-required"  />
+                </div>
+            </div>
+            <div class="form-group qty">
+                <div class="col-md-6 col-xs-6">
+                    <label for="qty">Quantity :</label>
+                    <div class="input-group">
+                        <input type='button' value='-' class='qtyminuscls' id="qtyminus" field='quantity' onclick="upateQuantity('quantity', 2, 1, '');"/>
+                        <input type='tel' name='qty[]' maxlength="4" id='quantity' tabindex='2' onpaste="return false;"  value='1' class='form-control qtyf required-entry'
+                               onkeypress="validateNumInput(event.charCode); return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 || event.ctrlKey;" onkeyup="updateQtyByKey(this)" />
+                        <input type='button' value='+' class='qtyplus' id="qtyplus" field='quantity'  onclick="upateQuantity('quantity', 1, 1, '');" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </fieldset>
+    <fieldset>
+        <div class="addProduct" style="">
+            <a id="add_field_button" class="">
+                <span><i class="fa fa-plus" aria-hidden="true"></i></span>
+                Add more products
+            </a>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <div class="col-md-6">
+                <div class="field">
+                    <label for="user_type" class="control-label">Reason for buying :</label>
+                    <div class="input-group">
+                        <div class="form-control" id="reason" >
+                            <label for="enduse" class="form-check-label">
+                                <input type="radio" name="reason" id="enduse" tabindex="3"  class="form-check-input required-entry" value="End use" />
+                                <span><i class="fa fa-user" aria-hidden="true"></i> End use</span>
+                            </label>
+                            <label for="resell" class="form-check-label">
+                                <input type="radio" name="reason" id="resell" tabindex="4"  class="form-check-input required-entry" value="Resell" />
+                                <span><i class="fa fa-exchange" aria-hidden="true"></i> Resell</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-8">
+                <label for="rSheet">Upload your requirement sheet (if any)</label>
+                <input type="file" style="display:inline-block" name="sheet" id="rSheet" tabindex="5" class="form-control-file" onchange="validateFile(this)" >
+                <a style="color: red; display: none;cursor:pointer;" tilte="Remove file" id="clearfile" onclick="clearFile()">Remove</a>
+                <div id="mage_file_error" style="color: red;margin-top:5px;font-size:12px;"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="field">
+                    <label for="paymentMode" class="control-label">Mode of Payment :</label>
+                    <div class="input-group" onclick="next();">
+                        <div class="form-control" id="modeOfPayment" >
+                            <label for="advanceP" class="form-check-label">
+                                <input type="radio" name="paymentMode" id="advanceP" tabindex="6" class="form-check-input required-entry" value="Advance payment" />
+                                <span><i class="fa fa-credit-card" aria-hidden="true"></i> Advance payment</span>
+                            </label>
+                            <label for="codP" class="form-check-label">
+                                <input type="radio" name="paymentMode" id="codP" tabindex="7" class="form-check-input required-entry" value="Cash on delivery" />
+                                <span><i class="fa fa-truck" aria-hidden="true"></i> Cash on delivery</span>
+                            </label>
+                            <label for="preferenceP" class="form-check-label">
+                                <input type="radio" name="paymentMode" id="preferenceP" tabindex="8" class="form-check-input required-entry" value="My preference" />
+                                <span><i class="fa fa-comment" aria-hidden="true"></i> Other preference</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="personal_info">
+        <legend class="legend"><span>Please tell us something about you:</span></legend>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Full name :</label>
+                <input type="text" name="name" id="cName" tabindex="9" placeholder="Name" maxlength="40" class="form-control validate-full-name" onkeypress="correctName(this)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="">Mobile :</label>
+                <input type="tel" name="mobile" id="" tabindex="10" placeholder="Mobile" minlength="10" maxlength="10"  class="form-control validate-mobile" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-8">
+                <label for="">Email :</label>
+                <input type="email" name="email" id="" tabindex="11" placeholder="Email" maxlength="40" class="form-control validate-email" onkeypress="return event.charCode != 32" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="">Company name :</label>
+                <input type="text" name="company_name" id="" tabindex="12" placeholder="Company name" maxlength="60" class="form-control validate-company-name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="natureofb">Nature of business :</label>
+                <select class="form-control " name="nature" id="natureofb"  tabindex="13" style="-webkit-appearance:menulist;-moz-appearance:caret; -ms-appearance:normal;appearance:normal;">
+                    <option value="">Select</option>
+                    <option value="Exporter">Exporter</option>
+                    <option value="Manufacturer">Manufacturer</option>
+                    <option value="Retailer">Retailer</option>
+                    <option value="Service Provider">Service Provider</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Wholesaler">Wholesaler</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="">GST number :</label>
+                <input type="text" name="gst_no" id="pBrand" tabindex="14" placeholder="GST number" minlength="15" maxlength="15"  class="form-control validate-gst-strict" onkeypress="return event.charCode != 32" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="pRemark">Remark :</label>
+                <textarea name="remark" id="pRemark" tabindex="15" placeholder="Remark (optional)" maxlength="255" class="form-control"  rows="3"></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="col-md-12">
+            <div class="primary btn-form">
+                <button type="submit" id="button_custom_form" name="custom-submit" tabindex="16" onclick="error_check()" class="btn button_submit " value="" >
+                       Get Quote <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<section id="addProductSection" style="visibility: hidden;height: 0;display: inline-block;">
+    <div id="removeAdded">
+    <div class="form-group pname">
+        <div class="col-md-12 col-xs-12">
+            <label for="pName">Product name :</label>
+            <input type="text" name="productName[]" placeholder="Product name" maxlength="30" class="form-control  [product-name]" />
+            <div class="uk-order-error" style="color:#e02b27;font-size: 1.2rem;"></div>
+        </div>
+    </div>
+    <div class="form-group qty">
+        <div class="col-md-6 col-xs-8">
+            <label for="qty">Quantity :</label>
+            <div class="input-group">
+                <input type='button' value='-' class='qtyminuscls'  id="[qtyminus]" field='quantity' onclick="[UpdateQuantityMinus]" />
+                <input type='tel' maxlength="4" id='[QuantityId]' onpaste="return false;" name='qty[]' value='1' class='form-control qtyf validate-greater-than-zero'
+                       onkeypress="validateNumInput(event.charCode); return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 || event.ctrlKey;" onkeyup="updateQtyByKey(this)" />
+                <input type='button' value='+' id="[qtyplus]" class='qtyplus' field='quantity' onclick="[UpdateQuantityPlus]"  />
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-4">
+            <div class="removeDiv">
+                <a class="remove_field"><span><i class="fa fa-trash" aria-hidden="true"></i></span> Remove</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<input type="hidden" id="flag-for-submit" value="no" />
+
+<script type="text/x-magento-init">
+    {
+        "#bulkrequirementform": {
+            "validation": {}
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function next() {
+        document.getElementById('modeOfPayment').style.border = '1px solid #ccc';
+        document.getElementById("cName").focus();
+    }
+    function validateNumInput(charCode) {
+        if (!(typeof charCode === 'boolean' || (charCode >= 48 && charCode <= 57))) {
+            return false;
+        }
+    }
+    function error_check(){
+
+        /* error check reason for buying */
+        if ((document.getElementById('enduse').checked || document.getElementById('resell').checked)) {
+            document.getElementById('reason').style.border = '1px solid #ccc';
+        }else {
+            document.getElementById('reason').style.border = '1px solid #FF0000';
+        }
+        if ((document.getElementById('advanceP').checked || document.getElementById('codP').checked || document.getElementById('preferenceP').checked)) {
+            document.getElementById('modeOfPayment').style.border = '1px solid #ccc';
+        }else {
+            document.getElementById('modeOfPayment').style.border = '1px solid #FF0000';
+        }
+    }
+    require(['jquery'],function(jQuery) {
+
+        jQuery(function ($) {
+            $('#upload').change(function () {
+                if ($(this).val()) {
+                    var filename = $(this).val();
+                    $(this).closest('.file-uload').find('#file_name_id').html(filename);
+                }
+            });
+        });
+
+        /* onclick payment method show div */
+
+        jQuery('#modeOfPayment').click(function() {
+            jQuery('html,body').animate({
+                    scrollTop: jQuery('#personal_info').offset().top},
+                'slow');
+        });
+
+        jQuery('#button_custom_form').on('click', function(e){
+            //e.preventDefault();
+            jQuery('.uk-order-prod').each(function(){
+                var current = jQuery(this);
+                if (current.val() == '') {
+                    current.siblings('.uk-order-error').html('');
+                    current.css('border-color', '1px solid #CCCCCC');
+                    jQuery('#flag-for-submit').val('no');
+                } else if (!/^[a-zA-Z0-9'+_"\/\-., ]+$/.test(current.val())) {
+                    current.siblings('.uk-order-error').html('Please enter a valid product name.');
+                    current.css('border-color', '1px solid #e02b27');
+                    jQuery('#flag-for-submit').val('yes');
+                } else {
+                    current.siblings('.uk-order-error').html('');
+                    current.css('border-color', '1px solid #CCCCCC');
+                    jQuery('#flag-for-submit').val('no');
+                }
+            });
+        });
+        jQuery('#bulkrequirementform').on('submit', function (e) {
+            if (jQuery('#flag-for-submit').val() == 'no') {
+                return true;
+            } else {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        /* onScroll page set focus on form */
+
+        /*jQuery(function(){
+            jQuery(window).scroll(function(){
+                var aTop = 400;
+                if(jQuery(this).scrollTop()> aTop){
+                    jQuery( "#pName" ).focus();
+                }
+            });
+        });*/
+    });
+
+    function validateFile(self) {
+
+        var file_size = self.files.item(0).size;
+        var file_name = self.files.item(0).name;
+        var error = '';
+        var error_display = document.getElementById('mage_file_error');
+        var btn = document.getElementById('button_custom_form');
+        var clearfile = document.getElementById('clearfile');
+        error_display.innerHTML = error;
+        btn.disabled = false;
+        if (file_size > 2500000) {
+            error += 'File must less than 2.5MB<br>';
+        }
+        var extension = ['png','jpg','jpeg','gif','doc','docx','txt','odt','xls','ods'];
+        var file_ext = file_name.split('.');
+        file_ext = file_ext[1] || '';
+        file_ext = file_ext.toLowerCase();
+        if (extension.indexOf(file_ext) == -1) {
+            error += 'File must be .png, .jpeg, .jpg, .gif, .doc, .docx, .txt, .xls, .ods, .odt only';
+        }
+        if (error != '') {
+            error_display.innerHTML = error;
+            btn.disabled = true;
+            clearfile.style.display = 'inline-block';
+        } else {
+            error_display.innerHTML = '';
+            btn.disabled = false;
+            clearfile.style.display = 'none';
+        }
+    }
+    function clearFile() {
+        document.getElementById('button_custom_form').disabled = false;
+        document.getElementById('mage_file_error').innerHTML = '';
+        document.getElementById('clearfile').style.display = 'none';
+        document.getElementById('rSheet').value = '';
+    }
+</script>
+<script type="text/javascript">
+    require(['jquery'],function(jQuery) {
+        var itemCount = 1;
+        jQuery(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = jQuery("#sectionAreaToAddField"); //Fields wrapper
+            var add_button = jQuery("#add_field_button"); //Add button ID
+            var x = 1; //initial text box count
+            jQuery(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    var newFieldHtml = jQuery("#addProductSection").html(); //New Field Html content
+                    newFieldHtml = newFieldHtml.replace("[product-name]", "uk-order-prod");
+                    //newFieldHtml = newFieldHtml.replace("[product-error]", "uk-order-error");
+                    newFieldHtml = newFieldHtml.replace("[QuantityId]", "quantity_" + x);
+                    newFieldHtml = newFieldHtml.replace("[qtyminus]", "qtyminus" + x);
+                    newFieldHtml = newFieldHtml.replace("[qtyplus]", "qtyplus" + x);
+                    newFieldHtml = newFieldHtml.replace("[UpdateQuantityMinus]", "upateQuantity('quantity_" + x + "', 2,1, " + x + ");");
+                    newFieldHtml = newFieldHtml.replace("[UpdateQuantityPlus]", "upateQuantity('quantity_" + x + "', 1,1, " + x + ");");
+                    x++; //text box increment
+                    jQuery(wrapper).append(newFieldHtml); //add input box
+                }
+                itemCount++;
+            });
+            jQuery(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                jQuery(this).parent('div').parent('div').parent('div').parent('#removeAdded').remove();
+                x--;
+                itemCount++;
+            });
+
+        });
+    });
+
+    function upateQuantity(id, updateType, delta, cn) {
+        var currentVal = parseInt(document.getElementById(id).value);
+        if (!isNaN(currentVal) && currentVal === 9999 && updateType == 1) {
+            document.getElementById(id).value = currentVal;
+            document.getElementById('qtyplus' + cn).disabled = true;
+        } else if (!isNaN(currentVal) && updateType == 1) {
+            document.getElementById(id).value = currentVal + delta;
+            document.getElementById('qtyminus' + cn).disabled = false;
+        } else if (!isNaN(currentVal) && updateType == 2) {
+            document.getElementById('qtyplus' + cn).disabled = false;
+            var diff  = currentVal - delta;
+            if(diff > 0) {
+                document.getElementById(id).value = currentVal - delta;
+            } else {
+                document.getElementById('qtyminus' + cn).disabled = true;
+            }
+        } else {
+            document.getElementById(id).value = 1;
+        }
+    }
+
+    function correctName(self) {
+        var data = self.value;
+        if (!(/^[a-zA-Z]+ ?([a-zA-Z]*) ?([a-zA-Z]*)$/i.test(data))) {
+            self.value = data.trim();
+        }
+    }
+
+    function updateQtyByKey(self) {
+        var str = self.id;
+        var qtyminus = str.replace('quantity_', 'qtyminus');
+        var qtyplus = str.replace('quantity_', 'qtyplus');
+        if (parseInt(self.value) === 0) {
+            self.value = 1;
+            document.getElementById(qtyminus).disabled = true;
+            document.getElementById(qtyplus).disabled = false;
+        } else if (self.value == 9999) {
+            document.getElementById(qtyplus).disabled = true;
+            document.getElementById(qtyminus).disabled = false;
+        } else {
+            document.getElementById(qtyminus).disabled = false;
+            document.getElementById(qtyplus).disabled = false;
+        }
+    }
+</script>

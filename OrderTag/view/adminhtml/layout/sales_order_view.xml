@@ -1,0 +1,14 @@
+<?xml version="1.0"?><!--
+/**
+ * Cart2Quote
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_info">
+            <referenceBlock name="order_info">
+                <block class="Urjakart\OrderTag\Block\Adminhtml\Order\View\Info" name="uk_sales_order_view_tag" template="order/view/info.phtml" />
+            </referenceBlock>
+        </referenceBlock>
+    </body>
+</page>

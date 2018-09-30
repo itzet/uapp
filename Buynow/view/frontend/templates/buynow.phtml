@@ -1,0 +1,38 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Catalog\Block\Product\View');
+$_product = $product->getProduct();
+if ($_product->isSaleable() && $_product->getAttributeText('not2order_hide_orderbtn') == 'No') { ?>
+        <button
+                type="submit"
+                title="<?php echo __('Add to Cart') ?>"
+                id="buy-now"
+                class="action primary tobuy"
+                style="margin-top: 10px"
+                data-mage-init=
+                '{
+                "Urjakart_Buynow/js/buy-now": {
+                    "form": "#product_addtocart_form"
+                }
+            }'
+        >
+            <span class="cart_icon"><?php echo __('Buy Now') ?></span>
+        </button>
+<?php } else { ?>
+    <button
+            type="submit"
+            title="<?php echo __('Out of Stock') ?>"
+            id="buy-now"
+            class="action primary tobuy"
+            style="margin-top: 10px;background-color:#F15A22;"
+            data-mage-init=
+            '{
+                "Urjakart_Buynow/js/buy-now": {
+                    "form": "#product_addtocart_form"
+                }
+            }'
+    disabled>
+        <span><?php echo __('Out of Stock') ?> <i class="fa fa-exclamation" aria-hidden="true"></i>
+</span>
+    </button>
+<?php } ?>

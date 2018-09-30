@@ -1,0 +1,50 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Urjakart\Checkout\Block\Billingposition" name="urjakartcheckout.billingposition" template="Urjakart_Checkout::billingposition.phtml"  cacheable="false" />
+        </referenceContainer>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="progressBar" xsi:type="array">
+                                    <item name="sortOrder" xsi:type="string">0</item>
+                                    <item name="component" xsi:type="string">Urjakart_Checkout/js/view/progress-bar</item>
+                                    <item name="displayArea" xsi:type="string">progressBar</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="deps" xsi:type="array">
+                                            <item name="0" xsi:type="string">checkout.steps.shipping-cart.cart</item>
+                                            <item name="0" xsi:type="string">checkout.steps.shipping-step.shippingAddress</item>
+                                            <item name="1" xsi:type="string">checkout.steps.billing-step.payment</item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <!-- The new step you add -->
+                                        <item name="cart" xsi:type="array">
+                                            <item name="component" xsi:type="string">Urjakart_Checkout/js/view/cart</item>
+                                            <item name="sortOrder" xsi:type="string">0</item>
+                                            <item name="children" xsi:type="array">
+                                                <!--add here child component declaration for your step-->
+                                            </item>
+                                        </item>
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Urjakart_Checkout/js/view/payment</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

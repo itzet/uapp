@@ -1,0 +1,794 @@
+/*
+ * Copyright © 2017-18 Urjakart. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ */
+.uk-popup-social {
+    width: 60%;
+    max-width: 650px;
+}
+.clear{
+    width:100%;
+    height:0;
+    clear:both;
+    font-size:0;
+    line-height:0;
+}
+
+#sociallogin_button{
+    margin-top:10px;
+    width: 100%;
+}
+
+#sociallogin_button button span{
+    box-sizing: border-box;
+}
+
+#sociallogin_button #bt-loginfb span span, #bt-loginfb span span{background:#2d78bd;}
+#sociallogin_button #bt-loginfb span, #bt-loginfb span{
+    background-color: #365ba9;
+    display: block;
+    float: left;
+    margin:0;
+}
+
+#sociallogin_button #bt-loginins span span, #bt-loginins-popup span span{background:#42729a;}
+#sociallogin_button #bt-logingo span, #bt-logingo span{
+    background-color: #c84a4b;
+    display: block;
+    float: left;
+    margin:0;
+}
+
+#sociallogin_button #bt-loginlinked span span, #bt-loginlinked span span{background:#1ea1f3;}
+#sociallogin_button #bt-loginlinked span, #bt-loginlinked span{
+    background-color:#279de6;
+    display: block;
+    float: left;
+    margin:0;
+}
+
+#sociallogin_button #bt-logingo span span, #bt-logingo span span{background:#dd4b39;}
+#magestore-popup  .input-box{width:100%;}
+
+#sociallogin-other-div{
+    display: block;
+    float: right;
+}
+#sociallogin-other-a{
+    width: 91px;
+    display: block;
+}
+.sociallogin-other{
+    display: block;
+    float: right;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.sociallogin-other-span{
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.sociallogin-other-span-img-popup{
+    float: right;
+    width: 26px;
+    height: 16px;
+    cursor: pointer;
+    background: url("sociallogin/add.png") no-repeat right;
+}
+
+.other-button{
+
+}
+.sociallogin-other-button{
+    width: auto;
+    max-width:375px;
+}
+button.bt-login-social{background:none;border:none;cursor: pointer;}
+button.bt-login-social:hover{opacity: 0.9;}
+button.bt-login-social span{
+    height:40px;
+    line-height:40px;
+    color:#fff;
+    float:left;
+    border-radius: 1px;
+    font-weight: 700;
+    width:104px;
+    max-width:100%;
+    font-size:13px;
+}
+#auth-popup #facebook-error {
+    font-size: 11px;
+    margin: -1px 0 0 0;
+}
+#sociallogin_button .sociallogin-other #other_sociallogin_label{}
+button.bt-login-social span span{
+    background-position:100% 0 !important;
+    padding-left:10px !important;
+    text-align: left;
+    color:#fff;
+    min-width: 110px;
+    font-size: 12px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: inherit;
+    text-transform:none;
+}
+button.bt-login-social span span {
+    min-width: 134px;
+}
+
+/* change poppup */
+#auth-popup{
+    position: fixed;
+    z-index: 100;
+    border-radius: 7px;
+    border: 10px solid #e3e3e3;
+    max-width: 620px;
+    width: 80%;
+    display: none;
+    background: url("https://img1.urjacart.in/image/upload/icon/page/offer-banner-new-2.jpg") no-repeat #fff;
+    background-size: contain;
+}
+.popup_banner {
+    display: inline-block ;
+    min-height: 539px;
+    background: url("https://img1.urjacart.in/image/upload/icon/page/offer-banner-new-2.jpg") no-repeat;
+    margin-bottom: -5px;
+    width: 250px;
+    float:left;
+}
+.border-popup {
+    float:right;
+    width: 350px;
+    height: auto;
+    background: #fff;
+    box-sizing: border-box;
+}
+#uk-social-login-popup{
+    float: left;
+    box-sizing: border-box;
+    padding-bottom: 6px;
+    width: 100%;
+}
+.popup_login_with {
+    margin: 0;
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+#bg_fade {
+    background-color: #000000;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1000;
+    opacity: 0.3;
+}
+#auth-popup-close,
+#sociallogin-close, #login-in-process-close{
+    cursor: pointer;
+    position: absolute;
+    z-index: 9999;
+    right: -20px;
+    top: -20px;
+    height: 34px;
+    width: 33px;
+    background:url("https://img1.urjacart.in/image/upload/icon/page/close.png") no-repeat;
+}
+
+#sociallogin-close:hover{
+    text-decoration: underline;
+}
+
+#auth-popup-close:hover{
+    text-decoration: underline;
+}
+#uk-popup-create-user,
+#auth-login-div{
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    min-height:424px;
+    position:relative;
+}
+a#uk-create-back {
+    font-size: 16px;
+    float: left;
+}
+.popup_login-a {
+    font-size: 18px !important;
+    color: #666666;
+    float: left;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 12px 0;
+    font-weight: 600;
+    background-color: #E3E3E3;
+}
+.popup-title-h3,
+.uk-login-h3{
+    font-size: 18px;
+    color: #666666;
+    font-weight: 600;
+    font-style: normal;
+    text-rendering: optimizeSpeed;
+}
+
+.popup_register_active {
+    font-size: 18px !important;
+    width: 50%;
+    float: left;
+    padding: 15px 0;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+.popup_login_active {
+    font-size: 18px !important;
+    width: 50%;
+    float: left;
+    padding: 16px 0;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+.popup_login_active {
+    font-size: 18px !important;
+    width: 50%;
+    float: left;
+    padding: 16px 0;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+.uk-login-form-popup {
+    width: 100%;
+    float:left;
+    padding:20px 15px 8px 15px;
+}
+.login-label{
+    float: left;
+    padding-top: 5px;
+    width: 100%;
+    font-weight: normal;
+    color: #666;
+}
+#auth-popup .form-list label{
+    float: left;
+    text-align: left;
+    display: inline-block;
+    font-size: 13px;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-weight: 600;
+    color: #666;
+    -webkit-user-select: none;
+}
+#uk-forgot-password,
+#uk-sociallogin-create-new-customer{
+    font-size: 14px;
+    float: right;
+}
+.popup_register-a {
+    font-size: 18px !important;
+    color: #666666;
+    float: left;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 12px 0;
+    font-weight: 600;
+    background-color: #E3E3E3;
+}
+
+#auth-popup .form-list .sociallogin-field {clear: both;margin-bottom: 5px;}
+.login-label em{
+    color: red;
+}
+.uk-login-input-box{
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.uk-login-input-box .input-text{
+    font-family: inherit;
+    font-size: 1.1em;
+    margin: 0 0 10px 0;
+    padding: 5px 4px;
+    width: 100%;
+    height: 40px;
+    border:none;
+    border-bottom:1px solid #d2d2d3;
+    border-radius: 0
+}
+#uk-popup-forgot-password,
+#uk-popup-create-new-customer{
+    font-size: 14px;
+    float:right;
+}
+#uk-popup-forgot-back{
+    margin-top: 5px;
+    font-size: 15px;
+    float: left;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+    background-color: #1979c3;
+    height: 40px;
+    padding: 9px;
+    color: #ffffff;
+    border-radius: 3px;
+}
+#uk-popup-login-forgot-button{
+    float: left;
+    width: 100%;
+    border-radius: 3px;
+}
+.ajax-login-image{
+    background: url("https://img1.urjacart.in/image/upload/icon/loader-3.gif") no-repeat scroll 0 0 #f3f1f1;
+    width: 30px;
+    height:30px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    border-radius: 42%;
+    z-index:9;
+
+}
+.uk-popup-invalid-email{
+    margin-left: 0;
+    color: red;
+}
+
+#auth-forgot-link{
+    float: left;
+    padding: 5px 10px;
+}
+#uk-back-to-login{
+    font-size: 10px;
+}
+.sociallogin-other-button-popup{
+    float: left;
+    padding: 0;
+    text-align: center;
+    margin-top: 15px;
+}
+#sociallogin_button ul.right{float:right;}
+#sociallogin_button ul.left{float:left;padding: 0;}
+
+.uk-login-popup-button .pass-register {
+    float: left;
+    width: 100%;
+}
+.uk-login-popup-button button {
+    margin:15px 0 15px 0;
+    background:#F15A22;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: inherit;
+    position: relative;
+    width: 300px;
+    height:40px;
+}
+.fields{
+    list-style:none;
+}
+.sociallogin-field {
+}
+button#uk-button-social-login-create {
+    float: left;
+    background:#F15A22;
+    display: inline-block;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: normal;
+    font-family: "Open Sans", Arial, sans-serif;
+    line-height: 19px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin: 15px 0 10px 0;
+    height: 40px;
+    width: 100%;
+    border-radius: 3px;
+}
+label.required:after, span.required:after {
+    content: ' *';
+    color: red;
+    font-weight: normal;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 12px;
+}
+.input-text.validation-failed {
+    border-color: red !important;
+}
+p.required, .validation-advice {
+    margin: -5px 0 0;
+    color: red;
+    font-size: 13px;
+}
+#uk-popup-create-user ul.form-list{
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+}
+#uk-popup-create-user ul.form-list .input-text{
+    height: 40px;
+    border:none;
+    border-bottom: 1px solid #CCCCCC;
+    margin: 0 0 10px 0;
+    padding: 5px 4px;
+    width: 100%;
+    border-radius:0;
+}
+@media screen and (min-width: 768px) and (max-width: 992px){
+    #auth-login-div,#uk-popup-create-user{width: 100%;padding:0;}
+    #uk-social-login-popup{padding:0 2% 0 0 }
+    .bt-login-social {width:98px;max-width:100%;}
+
+}
+
+@media screen and (max-width: 767px){
+    .border-popup {width: 100%;}
+    #auth-login-div,#uk-popup-create-user{width: 100%;padding:0; background: none;}
+    #uk-social-login-popup{padding:0;float: left; width: 100% }
+    ul.uk-social-login-popup{
+        text-align: center;
+        float: left;
+        width: 100%;
+    }
+    #auth-login-div,#uk-popup-create-user{
+        min-height: 160px;
+    }
+    #uk-social-login-popup ul.uk-social-login-popup li{
+        display: inline-block;
+    }
+    .uk-login-popup-button button{
+        float: left;
+        width: 100%;
+    }
+    #uk-popup-forgot-form{
+        float: left;
+        width: 100%;
+    }
+    .uk-login-popup-button .pass-register,
+    #auth-login-form .auth-login-input-box{
+        width: 50%;
+        float: left;
+    }
+    #uk-popup-forgot-form .auth-login-input-box,
+    #uk-popup-forgot-form .uk-login-input-box{
+        width: 100%;
+    }
+    #uk-popup-new-customer-form .sociallogin-field{
+        width: 50%;
+        float: left;
+        clear: none !important;
+    }
+    #auth-popup .input-box{
+        width: 98%;
+    }
+    #uk-popup-forgot-back{
+        margin-top: 0;
+    }
+    .uk-login-input-box .input-text{
+        width: 98%;
+    }
+    .bt-login-social {
+        width: 85px !important;
+    }
+    .uk-login-form-popup{
+        padding:15px 10px 8px 10px;
+    }
+}
+@media screen and (max-width: 550px){
+    .uk-login-popup-button .pass-register{
+        width: 100%;
+        text-align:center;
+    }
+    #uk-popup-forgot-password{
+        float:none;
+    }
+    #auth-login-form .uk-login-input-box,
+    #auth-login-form .auth-login-input-box{
+        width: 100%;
+        float: left;
+    }
+    #uk-popup-new-customer-form .sociallogin-field,
+    .uk-login-input-box .input-text{
+        width: 100%;
+    }
+    #sociallogin_button .sociallogin-other #other_sociallogin_label{
+        font-size: 27px;
+        line-height: 40px;
+    }
+}
+#sociallogin_button ul li.button.right{
+    float:right;
+}
+#auth-popup .input-box {width: 100%;}
+/* new style */
+@media screen and (max-width: 356px) {
+    .bt-login-social {
+        width: 81px !important;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    #sociallogin_button #bt-loginfb span, #bt-loginfb span, #sociallogin_button #bt-loginlinked span, #bt-loginlinked span , #sociallogin_button #bt-logingo span, #bt-logingo span
+    {
+        margin: 0;
+    }
+}
+@media screen and (max-width:992px) {
+    #auth-popup {
+        max-width: 370px;
+    }
+}
+
+button#uk-popup-login-button {
+    float: left;
+    background:#F15A22;
+    display: inline-block;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 19px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin: 15px 0 10px 0;
+    height: 40px;
+    width: 100%;
+    border-radius: 3px;
+
+}
+button.bt-login-social span .fa {font-size:23px; float:left;}
+button.bt-login-social span .fa.fa-google-plus{ padding: 8px 4px 9px 5px; background-color: #d34836;}
+button.bt-login-social span .fa.fa-facebook {padding: 9px 9px 8px 9px; background-color: #3b5998;}
+button.bt-login-social span .fa.fa-linkedin {padding:8px 7px 8px 8px; background-color: #1ea1f3;font-size: 24px;}
+.checkout-index-index button.bt-login-social span {width: 150px;max-width:100%;}
+
+.checkout-index-index .bt-login-social span {margin:0 !important;}
+.checkout-index-index button.bt-login-social {margin-right: 6px !important;}
+.uk-or-class{
+    border-bottom: 1px solid #e3e3e3;
+    width: calc(100% - 9%);
+    height: 1px;
+    position: relative;
+    margin:8px auto 20px;
+}
+
+.uk-or-class>span {
+    font-size: 12px;
+    font-weight: 400;
+    background: #fff;
+    position: absolute;
+    top: -14px;
+    left: 0;
+    margin: auto;
+    right: 0;
+    display: block;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e3e3e3;
+    border-radius: 49%;
+    text-align: center;
+    line-height: 26px;
+    text-transform: capitalize;
+}
+.uk-pop-login-social{display: inline-block; width: 100%; margin-top: 20px;}
+.uk-pop-login-socialBox{width:calc(100% - 78%);display:inline-block;}
+.uk-pop-login-socialbtns{width:77%; display: inline-flex;position:relative;height:41px;vertical-align:top;}
+.uk-pop-login-social .uk-or-class{width: calc(100% - 23%);float: right;margin:10px auto 9px;}
+.uk-login-error-pop{left: 0;top: 0;right: 0;bottom: 0;margin: auto;width: 250px;height: 144px;position: absolute;
+    background: rgb(255, 255, 255);-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    z-index:9991;text-align: center;padding: 15px;font-size: 16px;border-radius: 7px;border: 10px solid #e3e3e3;
+}
+#login_in_process_data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+#bt_fb_social_login_checkout, #bt_go_social_login_checkout, #bt_link_social_login_checkout{
+    display:inline-block !important;
+}
+.checkout-index-index #bt_fb_social_login_checkout, .checkout-index-index #bt_go_social_login_checkout, .checkout-index-index #bt_link_social_login_checkout{
+    display:none !important;
+}
+.form-create-account {
+    margin: 0 0 35px 0;
+}
+.login-container-inner .block.block-customer-login {
+    width: 100%;
+}
+.login-container-inner {
+    float: left;
+    width: 48%;
+}
+.login-container-inner .social-login-pg-container {
+    float: left;
+    width: 100%;
+    padding: 0 0 0 11px;
+}
+.login-container-inner .block-customer-login{
+    margin-bottom: 20px !important;
+}
+#uk-ovrlay-login{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #000;
+    opacity:0.3;
+
+}
+#uk-popup-social .border-popup{
+    padding:0;
+}
+#uk-popup-social ul{
+    padding: 0;
+    text-align: center;
+}
+#sociallogin_button #uk-popup-social ul li button {
+    width: 100%;
+    height: 37px;
+}
+ul.uk-social-login-popup{
+    padding: 0;
+    float: left;
+    height:41px;
+    margin-bottom: 0;
+    position:relative;
+    width: 100%;
+    text-align: center;
+}
+ul.uk-social-login-popup li {
+    border: none;
+    display: inline-grid;
+    margin:0 -1px;
+}
+
+#uk-popup-social {
+    text-align: center;
+    font-size: 2.5em;
+    line-height: 1.25em;
+    margin-bottom: 0.7em;
+    position: absolute;
+    top: 200px !important;
+    z-index: 100;
+    border: 10px solid rgba(255, 255, 255, 0.58);
+    border-radius: 7px;
+}
+#other_sociallogin_label {
+    background-color: rgb(240, 240, 237);
+    line-height: 2em;
+}
+
+.other-button {
+    padding: 0;
+}
+
+.bt-login-social {
+    padding: 0;
+    margin: 0 !important;
+}
+
+.top-container {
+    width: 100%;
+}
+
+#sociallogin_button {
+    float: left;
+}
+
+#sociallogin_button ul li.button, .sociallogin-other ul li.button {
+    background: none;
+    border: none;
+    margin-bottom: 6px;
+    padding: 3px;
+}
+
+#sociallogin_button ul li.button, .sociallogin-other ul li {
+    display: inline-block;
+    margin: 0 auto;
+}
+#sociallogin_button ul li.button:hover {
+    background: none !important;
+    border: none !important;
+    list-style: none !important;
+}
+
+.sociallogin-other-button {
+    _display: block !important;
+    z-index: 3000 !important;
+}
+
+#sociallogin-other-a {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
+
+#sociallogin-other-div {
+    display: inline-block;
+    width:100%;
+    margin: 0;
+}
+#sociallogin-other-a{
+    margin-left: -10px;
+}
+#sociallogin-other-b {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+}
+
+#sociallogin-other-b span {
+    display: block;
+    margin-right: 30px;
+    text-align: right;
+}
+
+#sociallogin-other-button {
+    top: 30px;
+}
+#bg_fade {
+    z-index: 11;
+    float: left;
+    width: 100%;
+    min-height: 3000px;
+}
+
+.active .sociallogin-other-span-img-popup {
+    float: right;
+    width: 26px;
+    height: 16px;
+    cursor: pointer;
+    background: url("sociallogin/sub.png") no-repeat right;
+}
+
+
+@media screen and (max-width: 767px) {
+    .uk-pop-login-socialBox{width:100%;}
+    .uk-pop-login-socialBox>form{margin-bottom:0;}
+    .uk-pop-login-social .uk-or-class{width: calc(100% - 0%);float: left;margin: 30px auto 14px;}
+    button.bt-login-social span .fa{width:100%;}
+    .uk-pop-login-socialbtns{width:100%;}
+    button.bt-login-social span{font-size:0;}
+    .uk-pop-login-social{margin-top:0;}
+    .login-container{margin-bottom:25px;}
+    .login-container-inner{width:100%;margin-bottom:20px;}
+    .login-container-inner .social-login-pg-container{padding:0;}
+    .login-container-inner .block.block-customer-login {padding:0;}
+    #auth-popup{width:90%;}
+    ul.uk-social-login-popup{margin-bottom:9px; }
+
+}

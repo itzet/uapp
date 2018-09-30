@@ -1,0 +1,73 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="col-md-12 payment-method-title field choice">
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <input type="radio" style="visibility: hidden"
+                   name="payment[method]"
+                   class="radio"
+                   data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+            <span class="rounds"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            <span data-bind="text: getTitle()"></span>
+            <!-- ko if: getInstructions() -->
+            <span class="payment_offer" data-bind="html: getInstructions()"></span>
+            <!-- /ko -->
+        </label>
+    </div>
+
+    <div class="col-md-12 payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="col-md-9 content-block">
+            <!--Net banking payment form start-->
+            <div id="nbForm">
+                <div class="popularBanks">
+                    <h5><b>Popular Banks</b></h5>
+                    <div class="l1">
+                        <label for="HDFB" class="label" >
+                            <input type="radio" class="radio" onclick="changeSelection('18')" id="HDFB" value="HDFB" name="bankname" />
+                            <span class="nb_hdfc"></span>
+                        </label>
+                        <label for="AXIB" class="label pull-right" >
+                            <input type="radio" class="radio" onclick="changeSelection('3')" id="AXIB"  value="AXIB" name="bankname" />
+                            <span class="nb_axis"></span>
+                        </label>
+                    </div>
+                    <div class="l1">
+                        <label for="ICIB" class="label" >
+                            <input type="radio" class="radio" onclick="changeSelection('19')"  id="ICIB" value="ICIB" name="bankname" />
+                            <span class="nb_icici"></span>
+                        </label>
+                        <label for="SBIB" class="label pull-right">
+                            <input type="radio"   onclick="changeSelection('41')" class="radio" id="SBIB" value="SBIB" name="bankname" />
+                            <span class="nb_sbi"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="otherBanks">
+                    <h5><b>Other Banks</b></h5>
+                    <select id="bankcode_nb" onchange="changeBank()"  data-bind="optionsValue: 'value', optionsText: 'label', optgroup: bankNames"></select>
+                    <span id="error-bankcode-nb" style="display: none;color:red;margin-bottom:5px;"></span>
+                </div>
+            </div>
+                <!--Net banking payment form end-->
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"  onclick="addFaq();"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: btnTxt()"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="col-md-12 payment-method-title field choice">
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <input type="radio" style="visibility: hidden"
+                   name="payment[method]"
+                   class="radio"
+                   data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+            <span class="rounds"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            <span data-bind="text: getTitle()"></span>
+            <span class="payment_offer" data-bind="html: getInstructions()"></span>
+        </label>
+    </div>
+    <div class="col-md-12 payment-method-content">
+        <div class="col-md-12 content-block">
+            <!--<h5><b>Popular Wallets</b></h5>-->
+            <div class="col-md-4 wallet-option payuMoneyoff" data-bind="if: activePayu()">
+                <label data-bind="attr: {'for': 'payumoney'}" class="label labelWallet payu"  style="padding: 10px 0 !important;">
+                    <input type="radio"
+                           name="payment[method]"
+                           style="visibility: hidden"
+                           class="radio"
+                           data-bind="attr: {'id': 'payumoney'}, value: 'payumoney', click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+                    <span class="rounds"><i class="fa fa-circle-o wlt" aria-hidden="true"></i></span>
+                    <span data-bind="activePayu()" class="payu_img"></span>
+                </label>
+            </div>
+            <div class="col-md-4 wallet-option" data-bind="if: activePaytm()">
+                <label data-bind="attr: {'for': 'paytm'}" class="label labelWallet paytm" style="padding: 10px 0 !important;">
+                    <input type="radio"
+                           name="payment[method]"
+                           style="visibility: hidden"
+                           class="radio"
+                           data-bind="attr: {'id': 'paytm'}, value: 'paytm', click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+                    <span class="rounds"><i class="fa fa-circle-o wlt" aria-hidden="true"></i></span>
+                    <span data-bind="activePaytm()" class="paytm_img"></span>
+                </label>
+            </div>
+            <!--
+            <div class="col-md-4 wallet-option" data-bind="if: activePaytm()">
+                <label data-bind="attr: {'for': 'paytm'}" class="label labelWallet paytm" style="padding: 10px 0 !important;">
+                    <input type="radio"
+                           name="payment[method]"
+                           style="visibility: hidden"
+                           class="radio"
+                           data-bind="attr: {'id': 'paytm'}, value: 'paytm', click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+                    <span class="rounds"><i class="fa fa-circle-o wlt" aria-hidden="true"></i></span>
+                    <span data-bind="activePaytm()" class="other_img"></span>
+                </label>
+            </div>
+            -->
+            <!-- other wallets
+            <div class="col-md-9 otherWallet ">
+                <div class="row">
+                    <h5><b>Other Wallet</b></h5>
+                </div>
+                <select id="bankcode_nb" onchange=""  data-bind="optionsValue: 'value', optionsText: 'label', optgroup: bankNames"></select>
+                <span id="error-bankcode-nb" style="display: none;color:red;margin-bottom:5px;"></span>
+            </div>
+            -->
+        </div>
+        <!--
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder" style="padding: 20px;" >
+                    <span data-bind="text: btnTxt()"></span>
+                </button>
+            </div>
+        </div>
+        -->
+
+    </div>
+</div>

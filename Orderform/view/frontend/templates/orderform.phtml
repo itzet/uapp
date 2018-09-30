@@ -1,0 +1,229 @@
+<?php
+$block->executeForm();
+$user = $block->getLoggedInUserData();
+$block->quickOrderProcess();
+?>
+<form action="<?php echo $block->getFormAction(); ?>" class="form-container" id="orderform" method="post" autocomplete="off">
+
+    <h4 class="h4">Don't have time, no worries ....
+        Just fill in your requirement and we will create the order for you.
+    </h4>
+    <input type="hidden" name="csrf_token_post" value="<?php echo $block->getCSRFToken(); ?>" >
+
+    <div class="row clearfix">
+        <div class="col-lg-6 col-md-6 mb-4 uk-step-detail-fl">
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('quick_order_form_steps')->toHtml();?>
+        </div>
+        <div class="orderFormCustom col-lg-6 col-md-6 mb-4 col-sm-12 col-xs-12">
+            <section class="form-content">
+                <div class="form-group">
+                    <label for="name" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Name</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input class="form-control validate-name" minlength="3" maxlength="40" placeholder="Name" value="<?php echo $user['name']; ?>" type="text" id="name" name="name" onkeyup="correctName(this)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Email</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input class="form-control validate-email" maxlength="40" value="<?php echo $user['email']; ?>" placeholder="Email" type="email" name="email" id="email" onkeypress="return event.charCode != 32" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Mobile</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input class="form-control validate-mobile" minlength="10" maxlength="10" placeholder="Mobile" value="<?php echo $user['mobile']; ?>" type="tel" id="mobile" name="mobile" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                    </div>
+                </div>
+            </section>
+            <section class="form-content" id="sectionAreaToAddField">
+                <div class="form-group">
+                    <label for="product-name" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Product name</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input class="form-control validate-product-name-required" maxlength="50" type="text" placeholder="Product name" id="product-name" name="productName[]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="quantity" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Quantity</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input type='button' value='-' class='qtyminus'  id="qtyminus" field='quantity' onclick="upateQuantity('quantity', 2, 1, '');"/>
+                        <input type='tel' maxlength="4" id='quantity' onpaste="return false;" name='qty[]' value='1' class='qtyf' onkeyup="updateQtyByKey(this)"  onkeypress='return event.charCode >= 48 && event.charCode <= 57;'/>
+                        <input type='button' value='+' class='qtyplus' id="qtyplus" field='quantity' onclick="upateQuantity('quantity', 1, 1, '');"/>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <span class="input addMoreFieldsBtn">
+                        <button class="add_field_button" id="add_field_button"><i class="fa fa-plus" aria-hidden="true"></i> Add More Items</button>
+                    </span>
+                </div>
+            </section>
+            <div class="form-group">
+                <label for="quantity" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">&nbsp;</label>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 placeOrderbtn">
+
+        <button type="submit" name="SUBMITORDER" class="uk-btn" id="ukform-order">Place Order</button>
+    </div>
+            </div>
+        </div>
+
+    </div>
+</form><!-- /form -->
+<section id="addProductSection" style="visibility: hidden;height: 0px">
+    <div class="relative-html">
+        <div class="form-group">
+            <label for="product-name" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Product name</label>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <input class="form-control validate-alphanum-with-special [product-name]" maxlength="50" type="text" placeholder="Product name" name="productName[]" />
+                <div class="uk-order-error" style="color:#e02b27;font-size: 1.2rem;"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="quantity" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-form-label">Quantity</label>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <input type='button' value='-' class='qtyminus'  id="[qtyminus]" field='quantity' onclick="[UpdateQuantityMinus]"/>
+                <input type='tel' maxlength="4" id='[QuantityId]' name='qty[]' value='1' class='qtyf' onkeyup="updateQtyByKey(this)"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+                <input type='button' value='+' class='qtyplus' id="[qtyplus]" field='quantity' onclick="[UpdateQuantityPlus]"/>
+            </div>
+        </div>
+
+        <span class="input removeAddFields">
+            <a href="#" class="remove_field"><i class="fa fa-times" aria-hidden="true"></i> <span class="hidden-xs"> Remove Items</span></a>
+        </span>
+    </div>
+</section>
+<input type="hidden" id="flag-for-submit" value="no" />
+
+<script type="text/x-magento-init">
+    {
+        "#orderform": {
+            "validation": {}
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    require(['jquery'],function(jQuery) {
+        var itemCount = 1;
+        jQuery(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = jQuery("#sectionAreaToAddField"); //Fields wrapper
+            var add_button = jQuery("#add_field_button"); //Add button ID
+            var x = 1; //initlal text box count
+            jQuery(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    var newFieldHtml = jQuery("#addProductSection").html(); //New Field Html content
+                    newFieldHtml = newFieldHtml.replace("[product-name]", "uk-order-prod");
+                    newFieldHtml = newFieldHtml.replace("[product-error]", "uk-order-error");
+                    newFieldHtml = newFieldHtml.replace("[QuantityId]", "quantity_" + x);
+                    newFieldHtml = newFieldHtml.replace("[qtyminus]", "qtyminus" + x);
+                    newFieldHtml = newFieldHtml.replace("[qtyplus]", "qtyplus" + x);
+                    newFieldHtml = newFieldHtml.replace("[UpdateQuantityMinus]", "upateQuantity('quantity_" + x + "', 2,1, " + x + ");");
+                    newFieldHtml = newFieldHtml.replace("[UpdateQuantityPlus]", "upateQuantity('quantity_" + x + "', 1,1, " + x + ");");
+                    x++; //text box increment
+                    jQuery(wrapper).append(newFieldHtml); //add input box
+                }
+                itemCount++;
+            });
+            jQuery(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                jQuery(this).parent('span').parent('div').remove();
+                x--;
+                itemCount++;
+            });
+            jQuery('#ukform-order').on('click', function(e){
+                //e.preventDefault();
+                jQuery('.uk-order-prod').each(function(){
+                    var current = jQuery(this);
+                    if (current.val() == '') {
+                        current.siblings('.uk-order-error').html('');
+                        current.css('border-color', '1px solid #CCCCCC');
+                        jQuery('#flag-for-submit').val('no');
+                    } else if (!/^[a-zA-Z0-9'+_"\/\-., ]+$/.test(current.val())) {
+                        current.siblings('.uk-order-error').html('Please enter a valid product name.');
+                        current.css('border-color', '1px solid #e02b27');
+                        jQuery('#flag-for-submit').val('yes');
+                    } else {
+                        current.siblings('.uk-order-error').html('');
+                        current.css('border-color', '1px solid #CCCCCC');
+                        jQuery('#flag-for-submit').val('no');
+                    }
+                });
+            });
+            jQuery('#orderform').on('submit', function (e) {
+               if (jQuery('#flag-for-submit').val() == 'no') {
+                   return true;
+               } else {
+                   e.preventDefault();
+                   return false;
+               }
+            });
+        });
+    });
+
+    function upateQuantity(id, updateType, delta, cn) {
+        var currentVal = parseInt(document.getElementById(id).value);
+        if (!isNaN(currentVal) && currentVal === 9999 && updateType == 1) {
+            document.getElementById(id).value = currentVal;
+            document.getElementById('qtyplus' + cn).disabled = true;
+            document.getElementById('qtyplus' + cn).style.background = '#dddddd';
+            document.getElementById('qtyplus' + cn).style.color = '#333';
+        } else if (!isNaN(currentVal) && updateType == 1) {
+            document.getElementById(id).value = currentVal + delta;
+            document.getElementById('qtyminus' + cn).disabled = false;
+            document.getElementById('qtyminus' + cn).style.background = '';
+            document.getElementById('qtyminus' + cn).style.color = '';
+        } else if (!isNaN(currentVal) && updateType == 2) {
+            document.getElementById('qtyplus' + cn).disabled = false;
+            document.getElementById('qtyplus' + cn).style.background = '';
+            document.getElementById('qtyplus' + cn).style.color = '';
+            var diff  = currentVal - delta;
+            if(diff > 0) {
+                document.getElementById(id).value = currentVal - delta;
+            } else {
+                document.getElementById('qtyminus' + cn).disabled = true;
+                document.getElementById('qtyminus' + cn).style.background = '#dddddd';
+                document.getElementById('qtyminus' + cn).style.color = '#333';
+            }
+        } else {
+            document.getElementById(id).value = 1;
+        }
+    }
+
+    function updateQtyByKey(self) {
+        var str = self.id;
+        var qtyminus = str.replace('quantity_', 'qtyminus');
+        var qtyplus = str.replace('quantity_', 'qtyplus');
+        if (parseInt(self.value) === 0) {
+            self.value = 1;
+            document.getElementById(qtyminus).disabled = true;
+            document.getElementById(qtyminus).style.background = '#dddddd';
+            document.getElementById(qtyminus).style.color = '#333';
+            document.getElementById(qtyplus).disabled = false;
+            document.getElementById(qtyplus).style.background = '';
+            document.getElementById(qtyplus).style.color = '';
+        } else if (self.value == 9999) {
+            document.getElementById(qtyplus).disabled = true;
+            document.getElementById(qtyplus).style.background = '#dddddd';
+            document.getElementById(qtyplus).style.color = '#333';
+            document.getElementById(qtyminus).disabled = false;
+            document.getElementById(qtyminus).style.background = '';
+            document.getElementById(qtyminus).style.color = '';
+        } else {
+            document.getElementById(qtyminus).disabled = false;
+            document.getElementById(qtyminus).style.background = '';
+            document.getElementById(qtyminus).style.color = '';
+            document.getElementById(qtyplus).disabled = false;
+            document.getElementById(qtyplus).style.background = '';
+            document.getElementById(qtyplus).style.color = '';
+        }
+    }
+
+    function correctName(self) {
+        var data = self.value;
+        if (!(/^[a-zA-Z]+ ?([a-zA-Z]*) ?([a-zA-Z]*)$/i.test(data))) {
+            self.value = data.trim();
+        }
+    }
+</script>

@@ -1,0 +1,115 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="col-md-12 payment-method-title field choice">
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <input type="radio" style="visibility: hidden"
+                   name="payment[method]"
+                   class="radio"
+                   data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+            <span class="rounds"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            <span data-bind="text: getTitle()"></span>
+            <!-- ko if: getInstructions() -->
+            <span class="payment_offer" data-bind="html: getInstructions()"></span>
+            <!-- /ko -->
+        </label>
+    </div>
+
+    <div class="col-md-12 payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="col-md-9 content-block">
+            <!--Debit card payment form start-->
+            <div id="dcForm">
+                <div class="cardnumber">
+                    <input style="display:none" type="text" />
+                    <input type="tel" id="ccnum_dc" class="" maxlength="16"
+                           placeholder="Card Number"
+                           onblur="showErr(this, 'dc')"
+                           onpaste="return false;"
+                           onchange="validateDebitCard(this, 'DC', false);"
+                           onkeypress="validateDebitCard(this, 'DC', event.charCode);
+                           return (event.charCode >= 48 && event.charCode <= 57) ||
+                           event.charCode == 0 || event.ctrlKey;" autocomplete="off"
+                    />
+                    <span id="error-ccnum_dc" class="pay-error"></span>
+                    <div class="field-tooltip toggle card_img">
+                        <span id="processing_dc" style="display: none;"></span>
+                        <span id="visa_dc" style="display: none;"></span>
+                        <span id="master_dc" style="display: none;"></span>
+                        <span id="amex_dc" style="display: none;"></span>
+                    </div>
+                </div>
+                <div class="cardnumber">
+                    <input style="display:none" type="text" />
+                    <input type="text" id="name_dc" class="" mixlength="2" maxlength="35"
+                           placeholder="Card Holder Name (Optional)"
+                           style="border: 1px solid #ccc;"
+                           onkeyup="convertUpperCase(this)"
+                           onblur="validateName(this, false)"
+                           autocomplete="off"
+                    />
+                    <span id="error-name_dc" class="pay-error"></span>
+                </div>
+                <div class="card-details">
+                    <div style="width:100%; float:left;">
+                        <div class="card-date" id="card_date_dc">
+                            <span class="exp">
+                                Expiry
+                            </span>
+                            <select id="ccexpmon_dc" onchange="removeError(this)"
+                                    data-bind="
+                                        optionsValue: 'value',
+                                        optionsText: 'label',
+                                        optgroup: expMonths">
+                            </select>
+                            <select id="ccexpyr_dc" onchange="removeError(this)"
+                                        data-bind="
+                                            optionsValue: 'value',
+                                            optionsText: 'label',
+                                            optgroup: expYears">
+                            </select>
+                        </div>
+                        <div class="card cvv" id="card_cvv_dc">
+                            <input style="display:none" type="password" />
+                            <input type="password" id="ccvv_dc" maxlength="3"
+                                   placeholder="CVV" onblur="removeErrorCvv(this)"
+                                   onkeypress='return (event.charCode >= 48 && event.charCode <= 57)
+                                    || event.charCode == 0 || event.ctrlKey;' autocomplete="off"
+                            />
+                            <span class="icons cvv_icon"></span>
+                        </div>
+                    </div>
+                    <span id="error_ccexpmon_dc" class="pay-error"></span>
+                    <span id="error_ccexpyr_dc" class="pay-error"></span>
+                    <span id="error_ccvv_dc" class="pay-error" style="float: right;"></span>
+                    <span id="info_mastro" style="display: none; color: #31708f; float:left;"></span>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="cardtype_dc" value="" />
+        <!--Debit card payment form end-->
+        <div class="actions-toolbar">
+            <p>
+                <span class="icons lock_icon"></span>
+                Your card details are secured via 128 Bit encryption
+            </p>
+            <div class="primary">
+                <button id="checkoutprocess_dc"  onclick="addFaq();"
+                        class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: btnTxt()"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

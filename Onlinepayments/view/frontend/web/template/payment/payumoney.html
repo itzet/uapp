@@ -1,0 +1,32 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="col-md-12 payment-method-content" id="payumoney-block" style="background: #f5faff;">
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!-- ko if: getInstructions() -->
+    <div class="col-md-9 content-block">
+        <div id="payu_content">
+            <p data-bind="html: getInstructions()"></p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button class="action primary checkout btnPayUmoney"
+                    onclick="addFaq();"
+                    type="submit"
+                    data-bind="
+                    click: placeOrder,
+                    enable: (getCode() == isChecked())
+                    "
+                    disabled>
+                <span data-bind="text: btnTxt()"></span>
+            </button>
+        </div>
+    </div>
+</div>

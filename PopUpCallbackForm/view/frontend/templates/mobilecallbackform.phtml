@@ -1,0 +1,151 @@
+<?php
+$block->executeForm();
+$user = $block->getLoggedInUserData();
+$block->requestCallBackProcess();
+?>
+
+<div class="main-content callback mobilecallbackformbox">
+    <a href="<?php echo $_SESSION['backUrl']; ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Back</a>
+    <div class="container">
+        <div class="row form-head mobileFrmHead">
+            <h4>Confused..<span class="confuse"></span></h4>
+            <h4 class="sub-h4">Talk to our domain expert</h4>
+        </div>
+        <div class="form-content row">
+            <form action="<?php echo $block->getProductUrl(); ?>" id="callback" onsubmit="callBackTracking()" method="post" autocomplete="off">
+                <input type="hidden" name="csrf_token_post" value="<?php echo $block->getCSRFToken(); ?>" >
+                <input type="hidden" name="murl" value="mreq" >
+                <fieldset>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                                <input readonly type="text" class="form-control required-entry" style="background-color: #f9f9f9;word-wrap: break-word;word-break: normal;border: 1px solid #CCCCCC;box-shadow: none;" name="pname" value="<?php echo $_SESSION['productName'];?>" placeholder="Product Name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-float-label">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" tabindex="1"  minlength="3" maxlength="40" autofocus class="form-control validate-name" id="cname" name="name" value="<?php echo $user['name']; ?>" placeholder="Name" onkeyup="correctName(this)" />
+                                <label for="name" class="label">Name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-float-label">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                <input type="tel" tabindex="2" minlength="10" maxlength="10" class="form-control validate-mobile" name="mobile" id="cmobile" value="<?php echo $user['mobile']; ?>"  placeholder="Mobile"
+                                       onkeypress="validateNumInput(event.charCode); return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 || event.ctrlKey;" />
+                                <label for="mobile" class="label">Mobile</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-float-label">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="email" tabindex="3"  maxlength="40" class="form-control validate-email" name="email" id="cemail" value="<?php echo $user['email']; ?>" placeholder="Email" onkeypress="return event.charCode != 32" />
+                                <label for="email" class="label">Email</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary btn-form">
+                        <button type="submit" class="btn button_submit" tabindex="4" id="button_cb_mobile" name="reqsubmit"  value="reqsubmit"><i class="fa fa-volume-control-phone" aria-hidden="true"></i>...Call Me</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#callback": {
+            "validation": {}
+        }
+    }
+</script>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productFactory = $objectManager->get('Magento\Catalog\Model\Product');
+$categoryFactory = $objectManager->get('Magento\Catalog\Model\Category');
+$_product = $productFactory->loadByAttribute('sku', $_SESSION['fsku']);
+$categoryIdList = $_product->getCategoryIds();
+$i = 1;
+$categoryIds = array();
+foreach($categoryIdList as $catid){
+    $data = $categoryFactory->load($catid);
+    $categoryIds[$data->getLevel()] = $catid;
+}
+ksort($categoryIds);
+foreach($categoryIds as $category){
+    $cat = $categoryFactory->load($category);
+    ${categoryL.$i} = $cat->getName();
+    $i++;
+}
+?>
+<script type="text/javascript">
+    function validateNumInput(charCode) {
+        if (!(typeof charCode === 'boolean' || (charCode >= 48 && charCode <= 57))) {
+            return false;
+        }
+    }
+
+    function callBackTracking() {
+        var name = document.getElementById('cname').value;
+        var mobile = document.getElementById('cmobile').value;
+        var email = document.getElementById('cemail').value;
+        var nameArr = [];
+        if (name !== '' && /^[a-zA-Z ]+$/.test(name)) {
+            name = name.split(' ');
+            for (var i=0; i < name.length; i++) {
+                if (name[i]) {
+                    nameArr.push(name[i]);
+                }
+            }
+        } else {
+            return false;
+        }
+        if (!(mobile !== '' && /^[6-9]{1}[0-9]{9}$/.test(mobile))) {
+            return false;
+        }
+        if (!(email !== '' && /^([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*@([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*\.(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]){2,})$/i.test(email))) {
+            return false;
+        }
+        mixpanel.register({
+            "First Name": nameArr[0],
+            "Last Name": nameArr[1],
+            "Email": email,
+            "Mobile": mobile
+        });
+        mixpanel.track(
+            "Submitted Request Call Back",
+            {
+                "Product Name": '<?php echo $_product->getName(); ?>',
+                "Product SKU": '<?php echo $_SESSION['fsku']; ?>',
+                "Product Category L1": "<?php echo $categoryL1; ?>",
+                "Product Category L2": "<?php echo $categoryL2; ?>",
+                "Product Category L3": "<?php echo $categoryL3; ?>",
+                "Product Price": <?php echo $price = $_product->getSpecialPrice() ? round($_product->getSpecialPrice()) : round($_product->getPrice()); ?>,
+                "Product Brand":"<?php echo $_SESSION['brand']; ?>"
+            }
+        );
+        mixpanel.people.set({
+            "$first_name": nameArr[0],
+            "$last_name": nameArr[1],
+            "$email": email,
+            "$phone": mobile
+        });
+    }
+
+    function correctName(self) {
+        var data = self.value;
+        if (!(/^[a-zA-Z]+ ?([a-zA-Z]*) ?([a-zA-Z]*)$/i.test(data))) {
+            self.value = data.trim();
+        }
+    }
+</script>

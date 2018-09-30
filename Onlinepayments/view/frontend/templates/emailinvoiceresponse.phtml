@@ -1,0 +1,47 @@
+<?php
+if ($block->checkAuth()) {
+    ?>
+    <div id="success_content">
+        <div id="success_page_title" class="page-title-wrapper">
+            <h1 class="page-title">
+                <span class="base" data-ui-id="page-title-wrapper">
+                    Thank you, <?php echo $block->getCustomerName(); ?>!
+                </span>
+            </h1>
+        </div>
+        <div class="checkout-success">
+            <p>
+                <strong>
+                    Your payment status is <?php echo $block->getPaymentStatus(); ?>!
+                </strong>
+            </p>
+            <p>
+                Your order number is: <a href="#" class="order-number">
+                    <?php echo $block->getOrderNumber(); ?>
+                </a>.
+            </p>
+            <p>
+                Please check the earlier email contain login detail, use that credential to login your account and check
+                order detail, status etc.
+            </p>
+        </div>
+    </div>
+    <div id="shop_more">
+        <div>
+            <a class="btn continue_shopping"
+               href="<?php echo $block->getHomeUrl(); ?>"><span>Continue Shopping</span></a>
+        </div>
+    </div>
+<?php
+} else {
+?>
+    <div id="success_content">
+        <div class="checkout-success">
+            <p>
+                Your are not authorize!
+            </p>
+        </div>
+    </div>
+<?php
+}
+?>

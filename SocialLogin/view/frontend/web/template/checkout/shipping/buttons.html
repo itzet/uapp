@@ -1,0 +1,20 @@
+<div class="uk-pop-login-social" data-bind="if : isSocialEnabled()">
+    <div class="uk-pop-login-socialBox">
+        <form>
+            <fieldset class="fieldset">
+                <div class="field">
+                    <label class="label">
+                        <span>Login with</span>
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="uk-pop-login-socialbtns">
+        <div id="progress_image_login_social" class="ajax-login-image" style="display:none;"></div>
+        <div data-bind="html: googleButton"></div>
+        <div data-bind="html: facebookButton"></div>
+        <div data-bind="html: linkedButton"></div>
+    </div>
+    <div class="uk-or-class"><span>or</span></div>
+</div>

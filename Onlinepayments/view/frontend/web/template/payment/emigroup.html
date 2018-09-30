@@ -1,0 +1,47 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="col-md-12 payment-method-title field choice">
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <input type="radio" style="visibility: hidden"
+                   name="payment[method]"
+                   class="radio"
+                   data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+            <span class="rounds"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            <span data-bind="text: getTitle()"></span>
+            <span class="payment_offer" id="emi_offer" data-bind="html: getInstructions()"></span>
+        </label>
+    </div>
+
+    <div class="payment-method-content">
+        <div class="row">
+            <div class="col-md-4 wallet-option" data-bind="if: activeEmi()">
+                <label data-bind="attr: {'for': 'emi'}" class="label">
+                    <input type="radio"
+                           name="payment[method]"
+                           style="visibility: hidden"
+                           class="radio"
+                           data-bind="attr: {'id': 'emi'}, value: 'emi', click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+                    <span class="rounds"><i class="fa fa-circle-o wlt" aria-hidden="true"></i></span>
+                    <span data-bind="text: activeEmi()"></span>
+                </label>
+            </div>
+            <div class="col-md-4 wallet-option" data-bind="if: activeKissht()">
+                <label data-bind="attr: {'for': 'kisshtpay'}" class="label">
+                    <input type="radio"
+                           name="payment[method]"
+                           style="visibility: hidden"
+                           class="radio"
+                           data-bind="attr: {'id': 'kisshtpay'}, value: 'kisshtpay', click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+                    <span class="rounds"><i class="fa fa-circle-o wlt" aria-hidden="true"></i></span>
+                    <span data-bind="text: activeKissht()"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
